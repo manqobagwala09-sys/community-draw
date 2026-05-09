@@ -3,262 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Community Charity Draw</title>
+<title>Community Draw Pro</title>
 
 <style>
-
-body{
-font-family:Arial, sans-serif;
-background:#f4f4f4;
-margin:0;
-padding:0;
-}
-
-header{
-background:#0a7f39;
-color:white;
-padding:25px;
-text-align:center;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:12px;
-background:#0a7f39;
-color:white;
-border:none;
-border-radius:10px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-opacity:0.9;
-}
-
-ul{
-padding:0;
-}
-
-li{
-list-style:none;
-background:#f7f7f7;
-padding:12px;
-margin-bottom:8px;
-border-radius:8px;
-}
-
-#winnerBox{
-margin-top:20px;
-padding:20px;
-background:#fff3cd;
-border-radius:12px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
-}
-
-.footer{
-text-align:center;
-padding:20px;
-margin-top:30px;
-background:#222;
-color:white;
-}
-
-.whatsapp{
-background:#25D366;
-}
-
-.pay{
-background:#0066cc;
-}
-
+body{font-family:Arial;background:#f4f4f4;margin:0}
+header{background:#0a7f39;color:#fff;text-align:center;padding:20px}
+.container{max-width:900px;margin:auto;padding:15px}
+.card{background:#fff;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
+input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.green{background:#0a7f39;color:white}
+.blue{background:#007bff;color:white}
+.red{background:#c0392b;color:white}
+li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
+#winnerBox{margin-top:15px;font-size:22px;font-weight:bold;color:green}
+small{color:gray}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>🎉 Community Charity Draw</h1>
-<p>Support Community • Stand A Chance To Win</p>
+<h1>🎉 Community Draw Pro</h1>
+<p>Secure Admin + Winner System</p>
 </header>
 
 <div class="container">
 
+<!-- LOGIN -->
+<div class="card" id="loginBox">
+<h2>🔐 Admin Login</h2>
+<input type="password" id="pass" placeholder="Enter Admin Password">
+<button class="blue" onclick="login()">Login</button>
+<small>Default password: 1234</small>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;">
+
 <div class="card">
-
-<h2>Join The Draw</h2>
-
-<p>
-Enter your name below to participate in the community charity draw.
-</p>
-
-<input
-type="text"
-id="newUser"
-placeholder="Enter your full name"
->
-
-<button onclick="addUser()">
-✅ Join Draw
-</button>
-
+<h2>Add User</h2>
+<input type="text" id="user" placeholder="Enter name">
+<button class="green" onclick="addUser()">Join Draw</button>
 </div>
 
 <div class="card">
-
-<h2>👥 Registered Members</h2>
-
-<ul id="userList"></ul>
-
+<h2>Users</h2>
+<ul id="list"></ul>
 </div>
 
 <div class="card">
-
-<h2>🎯 Admin Winner Selection</h2>
-
-<button onclick="pickWinner()">
-🎉 Pick Random Winner
-</button>
-
-<div id="winnerBox">
-No winner selected yet.
-</div>
-
+<h2>🎯 Draw Winner</h2>
+<button class="green" onclick="pickWinner()">Pick Winner</button>
+<div id="winnerBox">No winner yet</div>
 </div>
 
 <div class="card">
-
-<h2>💳 Contribution Information</h2>
-
-<p>
-Monthly contribution: <b>R30</b>
-</p>
-
-<button class="pay">
-Pay Contribution
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📱 WhatsApp Community</h2>
-
-<p>
-Join our WhatsApp community for updates and winner announcements.
-</p>
-
-<button
-class="whatsapp"
-onclick="window.open('https://wa.me/')"
->
-Join WhatsApp
-</button>
-
+<h2>📜 Winner History</h2>
+<ul id="history"></ul>
 </div>
 
 </div>
 
-<div class="footer">
-© 2026 Community Charity Draw • All Rights Reserved
 </div>
 
 <script>
 
-let users = [];
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+function login(){
+let p = document.getElementById("pass").value;
+if(p === "1234"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("app").style.display="block";
+render();
+}else{
+alert("Wrong password");
+}
+}
 
 function addUser(){
+let name = document.getElementById("user").value.trim();
+if(name === "") return alert("Enter name");
 
-const userInput =
-document.getElementById("newUser");
-
-const userName =
-userInput.value.trim();
-
-if(userName === ""){
-alert("Please enter your name.");
-return;
+// prevent duplicate
+if(users.includes(name)){
+return alert("User already exists");
 }
 
-users.push(userName);
-
-updateUsers();
-
-userInput.value = "";
-
-alert("Successfully joined the draw!");
+users.push(name);
+localStorage.setItem("users", JSON.stringify(users));
+document.getElementById("user").value="";
+render();
 }
 
-function updateUsers(){
+function render(){
+let list = document.getElementById("list");
+list.innerHTML="";
 
-const userList =
-document.getElementById("userList");
-
-userList.innerHTML = "";
-
-users.forEach((user,index)=>{
-
-const li =
-document.createElement("li");
-
-li.innerHTML =
-(index + 1) + ". " + user;
-
-userList.appendChild(li);
-
+users.forEach((u,i)=>{
+let li = document.createElement("li");
+li.innerText = (i+1)+". "+u;
+list.appendChild(li);
 });
 
+let h = document.getElementById("history");
+h.innerHTML="";
+
+history.forEach(w=>{
+let li = document.createElement("li");
+li.innerText = "🏆 "+w;
+h.appendChild(li);
+});
 }
 
 function pickWinner(){
+if(users.length === 0) return alert("No users");
 
-if(users.length === 0){
-alert("No users registered.");
-return;
-}
-
-const randomIndex =
-Math.floor(Math.random() * users.length);
-
-const winner =
-users[randomIndex];
+let w = users[Math.floor(Math.random()*users.length)];
 
 document.getElementById("winnerBox").innerHTML =
-"🎉 WINNER 🎉<br><br>" +
-"<span style='color:green;'>" +
-winner +
-"</span>";
+"🏆 WINNER: " + w;
 
+// save history
+history.unshift(w);
+localStorage.setItem("history", JSON.stringify(history));
+
+render();
 }
+
+render();
 
 </script>
 
 </body>
-  </html>
+</html>
