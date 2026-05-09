@@ -1,102 +1,159 @@
+<style>
+
+/* =========================
+   GLOBAL FUTURE DESIGN SYSTEM
+========================= */
+
+:root{
+--bg1:#070A12;
+--bg2:#0B1220;
+--card:rgba(255,255,255,0.06);
+--stroke:rgba(255,255,255,0.10);
+--text:#E5E7EB;
+--muted:rgba(229,231,235,0.65);
+
+--blue:#3B82F6;
+--green:#10B981;
+--purple:#8B5CF6;
+--cyan:#06B6D4;
+}
+
+/* =========================
+   BASE LAYOUT
+========================= */
+
 body{
 margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-color:#e5e7eb;
+font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+background: radial-gradient(circle at top, var(--bg2), var(--bg1));
+color:var(--text);
+overflow-x:hidden;
 }
 
-/* HEADER */
-.header{
-background:rgba(10,127,57,0.9);
-padding:25px;
+/* =========================
+   HEADER (GLASS EFFECT)
+========================= */
+
+header{
+padding:24px;
 text-align:center;
-font-size:22px;
-font-weight:bold;
-box-shadow:0 4px 20px rgba(0,0,0,0.3);
+background:rgba(255,255,255,0.04);
+backdrop-filter: blur(18px);
+border-bottom:1px solid var(--stroke);
+position:sticky;
+top:0;
+z-index:10;
 }
 
-/* CONTAINER */
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
+header h1{
+margin:0;
+font-size:26px;
+letter-spacing:1px;
 }
 
-/* CARD STYLE (FINTECH LOOK) */
+/* =========================
+   BUTTON SYSTEM (MODERN UI)
+========================= */
+
+button{
+padding:10px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+transition:0.25s ease;
+font-weight:500;
+}
+
+button:hover{
+transform:translateY(-2px);
+filter:brightness(1.2);
+}
+
+/* COLORS */
+.blue{background:var(--blue); color:white;}
+.green{background:var(--green); color:white;}
+.purple{background:var(--purple); color:white;}
+.cyan{background:var(--cyan); color:white;}
+
+/* =========================
+   CARD SYSTEM (GLASS UI)
+========================= */
+
 .card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.1);
-padding:20px;
-margin-top:20px;
+background:var(--card);
+border:1px solid var(--stroke);
+padding:16px;
+margin:12px 0;
 border-radius:16px;
-box-shadow:0 8px 30px rgba(0,0,0,0.4);
+backdrop-filter: blur(14px);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-3px);
+transform:scale(1.01);
+border-color:rgba(255,255,255,0.2);
 }
 
-/* INPUT */
+/* =========================
+   INPUTS (FUTURE STYLE)
+========================= */
+
 input{
-width:100%;
+width:95%;
 padding:12px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,0.2);
-background:rgba(0,0,0,0.3);
-color:white;
+margin:6px 0;
+border-radius:12px;
+border:1px solid var(--stroke);
+background:rgba(0,0,0,0.25);
+color:var(--text);
 outline:none;
 }
 
-/* BUTTONS */
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
+input:focus{
+border-color:var(--cyan);
+box-shadow:0 0 12px rgba(6,182,212,0.2);
 }
 
-button:hover{
-opacity:0.85;
-transform:scale(1.02);
+/* =========================
+   TEXT STYLING
+========================= */
+
+h2{
+margin-top:0;
+font-size:18px;
 }
 
-/* BUTTON COLORS */
-.pay{background:#3b82f6;color:white}
-.green{background:#10b981;color:white}
-.red{background:#ef4444;color:white}
-.whatsapp{background:#25D366;color:white}
-
-/* LISTS */
-li{
-list-style:none;
-padding:12px;
-margin:6px 0;
-background:rgba(255,255,255,0.08);
-border-radius:10px;
-border-left:4px solid #10b981;
+p{
+color:var(--muted);
 }
 
-/* WINNER BOX */
-#winnerBox{
-font-size:24px;
-font-weight:bold;
-color:#22c55e;
-margin-top:15px;
-text-align:center;
-padding:15px;
-background:rgba(34,197,94,0.1);
-border-radius:12px;
-border:1px solid rgba(34,197,94,0.3);
+/* =========================
+   LAYOUT CONTAINER
+========================= */
+
+.container{
+padding:18px;
+max-width:950px;
+margin:auto;
 }
 
-/* SMALL TEXT */
-small{
-color:#94a3b8;
-  }
+/* =========================
+   ANIMATION GLOW SYSTEM
+========================= */
+
+.glow{
+text-shadow:0 0 12px rgba(255,255,255,0.15);
+}
+
+/* subtle fade animation */
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.card{
+animation:fadeIn 0.4s ease;
+}
+
+</style>
