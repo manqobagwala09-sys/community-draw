@@ -1,21 +1,22 @@
-// =====================
-// 🧠 GLOBAL DATA ENGINE
-// =====================
+// ==============================
+// 🌍 GLOBAL PLATFORM ENGINE
+// ==============================
 
-let data = JSON.parse(localStorage.getItem("appData")) || {
+let state = JSON.parse(localStorage.getItem("platformState")) || {
 users: [],
+currentUser: null,
 invites: 0,
 points: 0,
-history: []
+activityLog: []
 };
 
-function save(){
-localStorage.setItem("appData", JSON.stringify(data));
+function saveState(){
+localStorage.setItem("platformState", JSON.stringify(state));
 }
 
-// =====================
-// 🏠 MAIN SYSTEM (DRAW)
-// =====================
+// ==============================
+// 🏠 USER SYSTEM (MAIN PAGE)
+// ==============================
 
 function join(){
 
@@ -26,119 +27,141 @@ alert("Enter name");
 return;
 }
 
-if(data.users.includes(name)){
-alert("Already joined");
+if(state.users.includes(name)){
+alert("User already exists");
 return;
 }
 
-data.users.push(name);
-data.history.push("Joined: " + name);
+state.users.push(name);
+state.currentUser = name;
 
-save();
+logActivity("User joined: " + name);
 
-if(document.getElementById("count"))
-document.getElementById("count").innerText = data.users.length;
+saveState();
 
-alert("Entry successful ✔");
+updateUI();
+
+alert("Welcome " + name);
 }
 
-function pick(){
+function pickWinner(){
 
-if(data.users.length === 0){
-alert("No users yet");
+if(state.users.length === 0){
+alert("No users available");
 return;
 }
 
-let winner = data.users[Math.floor(Math.random()*data.users.length)];
+let winner = state.users[Math.floor(Math.random() * state.users.length)];
 
-data.history.push("Winner: " + winner);
+logActivity("Winner selected: " + winner);
 
-document.getElementById("winner").innerText =
-"🏆 Winner: " + winner;
+document.getElementById("winner").innerText = "🏆 " + winner;
+
+saveState();
 }
 
-// =====================
-// 📊 GROWTH SYSTEM
-// =====================
+// ==============================
+// 📊 GROWTH ENGINE
+// ==============================
 
-function ref(){
+function generateReferral(){
 
-data.invites++;
-data.points += 2;
+state.invites++;
+state.points += 2;
 
-save();
-
-if(document.getElementById("inv"))
-document.getElementById("inv").innerText = data.invites;
-
-let link = "https://yourapp.com/?ref=" + data.invites;
+let link = "https://yourapp.com/?ref=" + state.invites;
 
 document.getElementById("link").value = link;
 
-alert("Referral generated ✔");
+logActivity("Referral generated");
+
+saveState();
+
+updateUI();
 }
 
-// =====================
-// 🎮 GAME HUB ENGINE
-// =====================
+// ==============================
+// 🎮 GAME / HUB ENGINE
+// ==============================
 
-function game(type){
+function playGame(type){
 
 let reward = 0;
 
-if(type === "chess"){
+switch(type){
+case "chess":
 reward = 3;
-}
-
-if(type === "predict"){
+break;
+case "predict":
 reward = 2;
-}
-
-if(type === "fish"){
+break;
+case "fish":
+reward = 1;
+break;
+default:
 reward = 1;
 }
 
-data.points += reward;
-data.history.push(type + " played +" + reward);
+state.points += reward;
 
-save();
+logActivity("Game played: " + type + " +" + reward);
 
-alert(type + " played ✔ +" + reward + " points");
+saveState();
+
+updateUI();
+
+alert(type + " completed +" + reward + " points");
 }
 
-// =====================
-// 📈 LIVE INIT UPDATE
-// =====================
+// ==============================
+// 🧠 PLATFORM LOGIC CORE
+// ==============================
 
-function init(){
+function logActivity(text){
+
+state.activityLog.push({
+text,
+time: new Date().toISOString()
+});
+
+if(state.activityLog.length > 50){
+state.activityLog.shift();
+}
+}
+
+// ==============================
+// 🔄 UI ENGINE
+// ==============================
+
+function updateUI(){
 
 if(document.getElementById("count"))
-document.getElementById("count").innerText = data.users.length;
+document.getElementById("count").innerText = state.users.length;
 
 if(document.getElementById("inv"))
-document.getElementById("inv").innerText = data.invites;
+document.getElementById("inv").innerText = state.invites;
 
 if(document.getElementById("points"))
-document.getElementById("points").innerText = data.points;
+document.getElementById("points").innerText = state.points;
 }
 
-init();
-
-// =====================
-// 🔁 PAGE NAVIGATION SAFE
-// =====================
+// ==============================
+// 🌐 PAGE CONTROLLER
+// ==============================
 
 function goTo(page){
 
-let main = document.getElementById("main");
-let growth = document.getElementById("growth");
-let hub = document.getElementById("hub");
+document.getElementById("main").style.display = "none";
+document.getElementById("growth").style.display = "none";
+document.getElementById("hub").style.display = "none";
 
-if(main) main.style.display = "none";
-if(growth) growth.style.display = "none";
-if(hub) hub.style.display = "none";
+if(page === "main") document.getElementById("main").style.display = "block";
+if(page === "growth") document.getElementById("growth").style.display = "block";
+if(page === "hub") document.getElementById("hub").style.display = "block";
+}
 
-if(page === "main" && main) main.style.display = "block";
-if(page === "growth" && growth) growth.style.display = "block";
-if(page === "hub" && hub) hub.style.display = "block";
-  }
+// ==============================
+// 🚀 INIT SYSTEM
+// ==============================
+
+updateUI();
