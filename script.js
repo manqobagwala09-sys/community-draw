@@ -1,6 +1,9 @@
 let users = JSON.parse(localStorage.getItem("users")) || [];
+let invites = 0;
 
-// JOIN
+// ================= MAIN SYSTEM =================
+
+// JOIN DRAW
 function joinDraw(){
 
 let name = document.getElementById("name").value.trim();
@@ -28,7 +31,7 @@ updateDashboard();
 
 }
 
-// RENDER
+// RENDER USERS
 function render(){
 
 let list = document.getElementById("userList");
@@ -75,7 +78,58 @@ if(r) r.innerText = revenue;
 
 }
 
-// PAGE SWITCH
+// ================= GROWTH SYSTEM =================
+
+// generate referral link
+function generateLinkSafe(){
+
+let link = window.location.origin + "?ref=" + Date.now();
+
+document.getElementById("refLink").value = link;
+
+}
+
+// copy link
+function copyLinkSafe(){
+
+let input = document.getElementById("refLink");
+
+if(!input.value){
+alert("Generate link first");
+return;
+}
+
+navigator.clipboard.writeText(input.value);
+
+alert("Copied!");
+
+}
+
+// simulate invite system
+function simulateInviteSafe(){
+
+invites++;
+
+document.getElementById("invites").innerText = invites;
+
+// progress bar
+let percent = (invites / 5) * 100;
+if(percent > 100) percent = 100;
+
+document.getElementById("bar").style.width = percent + "%";
+
+// leaderboard
+let board = document.getElementById("board");
+
+let li = document.createElement("li");
+li.innerText = "Invite #" + invites;
+
+board.appendChild(li);
+
+}
+
+// ================= PAGE SWITCH =================
+
 function goToPage(page){
 
 let main = document.getElementById("mainPage");
