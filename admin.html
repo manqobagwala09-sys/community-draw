@@ -9,7 +9,8 @@ font-family:Arial;
 background:#111;
 color:white;
 text-align:center;
-padding:40px;
+margin:0;
+padding:20px;
 }
 
 .box{
@@ -17,10 +18,10 @@ background:#222;
 padding:20px;
 border-radius:10px;
 max-width:400px;
-margin:auto;
+margin:80px auto;
 }
 
-input, button{
+input,button{
 width:90%;
 padding:10px;
 margin:10px 0;
@@ -34,52 +35,54 @@ color:white;
 cursor:pointer;
 }
 
-.dashboard{
+#dashboard{
 display:none;
-margin-top:20px;
 }
 
-.card{
+.member{
 background:#333;
-padding:15px;
 margin:10px;
-border-radius:10px;
+padding:10px;
+border-radius:8px;
+text-align:left;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Admin Login</h1>
+<h1>Admin Panel</h1>
 
+<!-- LOGIN -->
 <div class="box" id="loginBox">
-<input type="text" id="user" placeholder="Username">
-<input type="password" id="pass" placeholder="Password">
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
 <button onclick="login()">Login</button>
 </div>
 
-<div class="dashboard" id="dashboard">
+<!-- DASHBOARD -->
+<div id="dashboard">
 
-<h2>Admin Dashboard</h2>
+<h2>Members List</h2>
 
-<div class="card">Total Members: 0</div>
-<div class="card">Pending Payments: 0</div>
-<div class="card">Next Draw: Coming Soon</div>
+<div id="list"></div>
 
+<button onclick="loadMembers()">Refresh</button>
 <button onclick="logout()">Logout</button>
 
 </div>
 
 <script>
+
 function login(){
 let u = document.getElementById("user").value;
 let p = document.getElementById("pass").value;
 
-if(u === "admin" && p === "1234"){
+if(u==="admin" && p==="1234"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("dashboard").style.display="block";
-}
-else{
+loadMembers();
+}else{
 alert("Wrong login details");
 }
 }
@@ -88,6 +91,27 @@ function logout(){
 document.getElementById("loginBox").style.display="block";
 document.getElementById("dashboard").style.display="none";
 }
+
+function loadMembers(){
+let members = JSON.parse(localStorage.getItem("members")) || [];
+
+let output = "";
+
+members.forEach((m,i)=>{
+output += `
+<div class="member">
+<p><b>Name:</b> ${m.name}</p>
+<p><b>Phone:</b> ${m.phone}</p>
+<p><b>Plan:</b> ${m.plan}</p>
+<p><b>Status:</b> ${m.status}</p>
+</div>
+`;
+});
+
+document.getElementById("list").innerHTML =
+output || "No members yet";
+}
+
 </script>
 
 </body>
