@@ -1,6 +1,6 @@
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// JOIN DRAW
+// JOIN
 function joinDraw(){
 
 let name = document.getElementById("name").value.trim();
@@ -19,8 +19,7 @@ users.push(name);
 localStorage.setItem("users", JSON.stringify(users));
 
 document.getElementById("ticketInfo").innerHTML =
-"🎫 Entry Confirmed | Ticket #" +
-Math.floor(100000 + Math.random()*900000);
+"🎫 Ticket #" + Math.floor(100000 + Math.random()*900000);
 
 document.getElementById("name").value="";
 
@@ -29,7 +28,7 @@ updateDashboard();
 
 }
 
-// RENDER USERS
+// RENDER
 function render(){
 
 let list = document.getElementById("userList");
@@ -51,7 +50,7 @@ updateDashboard();
 function pickWinner(){
 
 if(users.length === 0){
-alert("No entries yet");
+alert("No users yet");
 return;
 }
 
@@ -62,7 +61,7 @@ document.getElementById("winnerBox").innerHTML =
 
 }
 
-// DASHBOARD UPDATE
+// DASHBOARD
 function updateDashboard(){
 
 let total = users.length;
@@ -73,6 +72,24 @@ let r = document.getElementById("estimatedRevenue");
 
 if(t) t.innerText = total;
 if(r) r.innerText = revenue;
+
+}
+
+// PAGE SWITCH
+function goToPage(page){
+
+let main = document.getElementById("mainPage");
+let growth = document.getElementById("growthPage");
+
+if(page === "growth"){
+main.style.display = "none";
+growth.style.display = "block";
+}
+
+if(page === "main"){
+main.style.display = "block";
+growth.style.display = "none";
+}
 
 }
 
