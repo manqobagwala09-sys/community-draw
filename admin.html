@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel - Community Draw</title>
+
+<style>
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+.box{
+background:#222;
+padding:20px;
+border-radius:10px;
+max-width:400px;
+margin:auto;
+}
+
+input, button{
+width:90%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:5px;
+}
+
+button{
+background:green;
+color:white;
+cursor:pointer;
+}
+
+.dashboard{
+display:none;
+margin-top:20px;
+}
+
+.card{
+background:#333;
+padding:15px;
+margin:10px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Admin Login</h1>
+
+<div class="box" id="loginBox">
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<div class="dashboard" id="dashboard">
+
+<h2>Admin Dashboard</h2>
+
+<div class="card">Total Members: 0</div>
+<div class="card">Pending Payments: 0</div>
+<div class="card">Next Draw: Coming Soon</div>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+<script>
+function login(){
+let u = document.getElementById("user").value;
+let p = document.getElementById("pass").value;
+
+if(u === "admin" && p === "1234"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("dashboard").style.display="block";
+}
+else{
+alert("Wrong login details");
+}
+}
+
+function logout(){
+document.getElementById("loginBox").style.display="block";
+document.getElementById("dashboard").style.display="none";
+}
+</script>
+
+</body>
+</html>
