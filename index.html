@@ -1,55 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Community Draw SA</title>
-
 <style>
 body{font-family:Arial;margin:0;background:#f4f4f4;}
-
-header{
-background:#008000;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-nav{
-background:#222;
-text-align:center;
-padding:10px;
-}
-
-nav a{
-color:white;
-margin:10px;
-text-decoration:none;
-}
-
-.section{
-background:white;
-margin:20px;
-padding:20px;
-border-radius:10px;
-}
-
-.btn{
-background:#008000;
-color:white;
-padding:10px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-.plan{
-border:2px solid #008000;
-padding:15px;
-margin:10px;
-border-radius:10px;
-text-align:center;
-}
+header{background:#008000;color:white;text-align:center;padding:20px;}
+.section{background:white;margin:20px;padding:20px;border-radius:10px;}
+.plan{border:2px solid #008000;padding:15px;margin:10px;border-radius:10px;}
+button{background:#008000;color:white;padding:10px;border:none;cursor:pointer;}
 </style>
 </head>
 
@@ -57,49 +15,34 @@ text-align:center;
 
 <header>
 <h1>Community Draw SA</h1>
-<p>Win Monthly Rewards</p>
 </header>
 
-<nav>
-<a href="#">Home</a>
-<a href="#membership">Membership</a>
-<a href="#">Winners</a>
-<a href="admin.html">Admin</a>
-</nav>
-
 <div class="section">
-<h2>Welcome</h2>
-<p>Join the community draw and stand a chance to win monthly prizes.</p>
-</div>
-
-<!-- MEMBERSHIP -->
-<div class="section" id="membership">
 <h2>Membership Plans</h2>
 
 <div class="plan">
-<h3>Basic</h3>
+<h3>Basic Plan</h3>
 <p>R30 / Month</p>
-<button class="btn">Join</button>
+<button onclick="alert('Basic selected')">Join</button>
 </div>
 
 <div class="plan">
-<h3>Silver</h3>
+<h3>Silver Plan</h3>
 <p>R50 / 3 Months</p>
-<button class="btn">Join</button>
+<button onclick="alert('Silver selected')">Join</button>
 </div>
 
 <div class="plan">
-<h3>Premium</h3>
+<h3>Premium Plan</h3>
 <p>R100 / 6 Months</p>
-<button class="btn">Join</button>
+<button onclick="alert('Premium selected')">Join</button>
 </div>
 
 </div>
 
-<!-- WINNER -->
 <div class="section">
 <h2>Today Winner</h2>
-<p>No winner announced yet</p>
+<p>No winner yet</p>
 </div>
 
 </body>
