@@ -1,9 +1,9 @@
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let invites = 0;
+let points = 0;
 
 // ================= MAIN SYSTEM =================
 
-// JOIN DRAW
 function joinDraw(){
 
 let name = document.getElementById("name").value.trim();
@@ -21,8 +21,8 @@ return;
 users.push(name);
 localStorage.setItem("users", JSON.stringify(users));
 
-document.getElementById("ticketInfo").innerHTML =
-"🎫 Ticket #" + Math.floor(100000 + Math.random()*900000);
+document.getElementById("ticketInfo").innerText =
+"Ticket #" + Math.floor(100000 + Math.random()*900000);
 
 document.getElementById("name").value="";
 
@@ -31,7 +31,6 @@ updateDashboard();
 
 }
 
-// RENDER USERS
 function render(){
 
 let list = document.getElementById("userList");
@@ -49,38 +48,32 @@ updateDashboard();
 
 }
 
-// WINNER
 function pickWinner(){
 
 if(users.length === 0){
-alert("No users yet");
+alert("No users");
 return;
 }
 
 let winner = users[Math.floor(Math.random()*users.length)];
 
-document.getElementById("winnerBox").innerHTML =
-"🏆 WINNER: " + winner;
+document.getElementById("winnerBox").innerText =
+"🏆 " + winner;
 
 }
 
-// DASHBOARD
 function updateDashboard(){
 
 let total = users.length;
 let revenue = total * 30;
 
-let t = document.getElementById("totalUsers");
-let r = document.getElementById("estimatedRevenue");
-
-if(t) t.innerText = total;
-if(r) r.innerText = revenue;
+document.getElementById("totalUsers").innerText = total;
+document.getElementById("estimatedRevenue").innerText = revenue;
 
 }
 
 // ================= GROWTH SYSTEM =================
 
-// generate referral link
 function generateLinkSafe(){
 
 let link = window.location.origin + "?ref=" + Date.now();
@@ -89,7 +82,6 @@ document.getElementById("refLink").value = link;
 
 }
 
-// copy link
 function copyLinkSafe(){
 
 let input = document.getElementById("refLink");
@@ -101,24 +93,21 @@ return;
 
 navigator.clipboard.writeText(input.value);
 
-alert("Copied!");
+alert("Copied");
 
 }
 
-// simulate invite system
 function simulateInviteSafe(){
 
 invites++;
 
 document.getElementById("invites").innerText = invites;
 
-// progress bar
-let percent = (invites / 5) * 100;
-if(percent > 100) percent = 100;
+let percent = (invites/5)*100;
+if(percent>100) percent=100;
 
-document.getElementById("bar").style.width = percent + "%";
+document.getElementById("bar").style.width = percent+"%";
 
-// leaderboard
 let board = document.getElementById("board");
 
 let li = document.createElement("li");
@@ -128,22 +117,37 @@ board.appendChild(li);
 
 }
 
+// ================= HUB SYSTEM =================
+
+function addPoint(type){
+
+points++;
+
+document.getElementById("points").innerText = points;
+
+let board = document.getElementById("hubBoard");
+
+let li = document.createElement("li");
+
+if(type==="prediction") li.innerText="⚽ Prediction +1";
+if(type==="team") li.innerText="👥 Team +1";
+if(type==="reward") li.innerText="🎁 Reward +1";
+
+board.appendChild(li);
+
+}
+
 // ================= PAGE SWITCH =================
 
 function goToPage(page){
 
-let main = document.getElementById("mainPage");
-let growth = document.getElementById("growthPage");
+document.getElementById("mainPage").style.display="none";
+document.getElementById("growthPage").style.display="none";
+document.getElementById("hubPage").style.display="none";
 
-if(page === "growth"){
-main.style.display = "none";
-growth.style.display = "block";
-}
-
-if(page === "main"){
-main.style.display = "block";
-growth.style.display = "none";
-}
+if(page==="main") document.getElementById("mainPage").style.display="block";
+if(page==="growth") document.getElementById("growthPage").style.display="block";
+if(page==="hub") document.getElementById("hubPage").style.display="block";
 
 }
 
