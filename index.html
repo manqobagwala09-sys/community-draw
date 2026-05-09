@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw</title>
+<title>Community Draw Pro System</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;margin:0}
+body{font-family:Arial;margin:0;background:#f4f4f4}
 header{background:#0a7f39;color:white;text-align:center;padding:20px}
 .container{max-width:900px;margin:auto;padding:15px}
 .card{background:white;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
@@ -14,8 +14,10 @@ input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid
 button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
 .pay{background:#007bff;color:white}
 .green{background:#0a7f39;color:white}
+.whatsapp{background:#25D366;color:white}
 li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
 #winnerBox{font-size:22px;font-weight:bold;color:green;margin-top:10px}
+small{color:gray}
 </style>
 
 </head>
@@ -23,34 +25,37 @@ li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8p
 <body>
 
 <header>
-<h1>🎉 Community Draw</h1>
-<p>Pay • Enter • Win</p>
+<h1>🎉 Community Draw Pro</h1>
+<p>Pay • Enter • Win • Share</p>
 </header>
 
 <div class="container">
 
 <!-- PAYMENT -->
 <div class="card">
-<h2>💳 Step 1: Pay Entry Fee</h2>
+<h2>💳 Step 1: Pay Entry</h2>
 
-<p>Pay R30 to join the draw</p>
+<p>R30 Entry Fee</p>
 
 <button class="pay"
 onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
-Pay R30 Now
+Pay Now
 </button>
 
+<small>After payment, enter your details below</small>
 </div>
 
 <!-- ENTRY -->
 <div class="card">
-<h2>🎫 Step 2: Enter Name</h2>
+<h2>🎫 Step 2: Enter Draw</h2>
 
 <input type="text" id="name" placeholder="Enter your name">
 
 <button class="green" onclick="addUser()">
 Join Draw
 </button>
+
+<p id="ticketInfo"></p>
 
 </div>
 
@@ -62,7 +67,7 @@ Join Draw
 
 <!-- DRAW -->
 <div class="card">
-<h2>🏆 Winner</h2>
+<h2>🏆 Winner System</h2>
 
 <button class="green" onclick="pickWinner()">
 Pick Winner
@@ -72,11 +77,31 @@ Pick Winner
 
 </div>
 
+<!-- HISTORY -->
+<div class="card">
+<h2>📜 Winner History</h2>
+<ul id="history"></ul>
+</div>
+
+<!-- WHATSAPP -->
+<div class="card">
+<h2>📲 Share & Grow</h2>
+
+<button class="whatsapp"
+onclick="window.open('https://wa.me/?text=Join%20Community%20Draw%20and%20win%20cash!','_blank')">
+Share on WhatsApp
+</button>
+
+</div>
+
 </div>
 
 <script>
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+let ticket = 1000;
 
 function addUser(){
 
@@ -92,10 +117,16 @@ alert("Already entered");
 return;
 }
 
+ticket++;
 users.push(name);
+
 localStorage.setItem("users", JSON.stringify(users));
 
+document.getElementById("ticketInfo").innerText =
+"🎫 Ticket #" + ticket;
+
 document.getElementById("name").value="";
+
 render();
 
 }
@@ -106,16 +137,25 @@ let list = document.getElementById("list");
 list.innerHTML="";
 
 users.forEach((u,i)=>{
-let li = document.createElement("li");
-li.innerText = (i+1)+". "+u;
+let li=document.createElement("li");
+li.innerText=(i+1)+". "+u;
 list.appendChild(li);
+});
+
+let h=document.getElementById("history");
+h.innerHTML="";
+
+history.forEach(w=>{
+let li=document.createElement("li");
+li.innerText="🏆 "+w;
+h.appendChild(li);
 });
 
 }
 
 function pickWinner(){
 
-if(users.length === 0){
+if(users.length===0){
 alert("No entries");
 return;
 }
@@ -124,6 +164,11 @@ let w = users[Math.floor(Math.random()*users.length)];
 
 document.getElementById("winnerBox").innerHTML =
 "🏆 WINNER: " + w;
+
+history.unshift(w);
+localStorage.setItem("history", JSON.stringify(history));
+
+render();
 
 }
 
