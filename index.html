@@ -1,1 +1,44 @@
-index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Draw</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Community Charity Draw</h1>
+    <p>Win community rewards through monthly participation</p>
+  </header>
+
+  <section class="card">
+    <h2>Join the Draw</h2>
+
+    <form id="joinForm">
+      <input type="text" placeholder="Full Name" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="email" placeholder="Email Address" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Today's Winner</h2>
+
+    <div id="winnerBox">
+      No winner selected yet
+    </div>
+
+    <button onclick="pickWinner()">Run Draw</button>
+  </section>
+
+  <footer>
+    <p>Powered by Community Draw SA</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
