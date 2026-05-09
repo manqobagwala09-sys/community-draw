@@ -1,12 +1,12 @@
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// JOIN SYSTEM (clean + mobile optimized)
+// JOIN DRAW
 function joinDraw(){
 
 let name = document.getElementById("name").value.trim();
 
 if(name === ""){
-alert("Please enter your name");
+alert("Enter name");
 return;
 }
 
@@ -18,35 +18,36 @@ return;
 users.push(name);
 localStorage.setItem("users", JSON.stringify(users));
 
-// ticket
-let ticket = Math.floor(100000 + Math.random() * 900000);
-
 document.getElementById("ticketInfo").innerHTML =
-"🎫 Entry Confirmed | Ticket #" + ticket;
+"🎫 Entry Confirmed | Ticket #" +
+Math.floor(100000 + Math.random()*900000);
 
-document.getElementById("name").value = "";
+document.getElementById("name").value="";
 
 render();
+updateDashboard();
 
 }
 
-// DISPLAY USERS
+// RENDER USERS
 function render(){
 
 let list = document.getElementById("userList");
 if(!list) return;
 
-list.innerHTML = "";
+list.innerHTML="";
 
 users.forEach((u,i)=>{
-let li = document.createElement("li");
-li.innerText = (i+1) + ". " + u;
+let li=document.createElement("li");
+li.innerText=(i+1)+". "+u;
 list.appendChild(li);
 });
 
+updateDashboard();
+
 }
 
-// WINNER SYSTEM
+// WINNER
 function pickWinner(){
 
 if(users.length === 0){
@@ -54,12 +55,27 @@ alert("No entries yet");
 return;
 }
 
-let winner = users[Math.floor(Math.random() * users.length)];
+let winner = users[Math.floor(Math.random()*users.length)];
 
 document.getElementById("winnerBox").innerHTML =
 "🏆 WINNER: " + winner;
 
 }
 
+// DASHBOARD UPDATE
+function updateDashboard(){
+
+let total = users.length;
+let revenue = total * 30;
+
+let t = document.getElementById("totalUsers");
+let r = document.getElementById("estimatedRevenue");
+
+if(t) t.innerText = total;
+if(r) r.innerText = revenue;
+
+}
+
 // INIT
 render();
+updateDashboard();
