@@ -1,41 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
-<link rel="stylesheet" href="style.css">
+<title>Admin Control Core</title>
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.06);
+--stroke:rgba(255,255,255,0.12);
+--text:#e5e7eb;
+--accent:#3b82f6;
+--green:#10b981;
+--red:#ef4444;
+}
+
+body{
+margin:0;
+font-family:system-ui;
+background:var(--bg);
+color:var(--text);
+}
+
+header{
+padding:20px;
+text-align:center;
+background:rgba(255,255,255,0.04);
+border-bottom:1px solid var(--stroke);
+}
+
+.container{
+padding:15px;
+max-width:1000px;
+margin:auto;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--stroke);
+padding:15px;
+border-radius:14px;
+margin:12px 0;
+backdrop-filter:blur(10px);
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin:5px;
+transition:0.2s;
+}
+
+button:hover{transform:scale(1.03);}
+
+.blue{background:var(--accent);color:white;}
+.green{background:var(--green);color:white;}
+.red{background:var(--red);color:white;}
+
+input{
+width:95%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:1px solid var(--stroke);
+background:rgba(0,0,0,0.3);
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:10px;
+}
+</style>
+
 </head>
 
 <body>
 
-<header class="header">
-<h1>🔐 Admin Panel</h1>
+<header>
+<h1>🔐 ADMIN CONTROL CORE</h1>
+<p>System Management Dashboard</p>
 </header>
 
 <div class="container">
 
+<!-- USERS PANEL -->
 <div class="card">
-<h2>System Control</h2>
-
-<button onclick="clearAll()" class="btn red">
-Reset System
-</button>
-
-<button onclick="exportData()" class="btn blue">
-Export Data
-</button>
+<h2>👥 User Control</h2>
+<p>Total Users: <span id="users">0</span></p>
+<button class="blue" onclick="refreshUsers()">Refresh Users</button>
 </div>
 
+<!-- DRAW CONTROL -->
 <div class="card">
-<h2>📊 Stats</h2>
-<p>Total Users: <span id="totalUsers"></span></p>
-<p>Total Revenue: R<span id="totalRevenue"></span></p>
+<h2>🏆 Draw Control</h2>
+<button class="green" onclick="runDraw()">Run Draw</button>
+<p id="winner">No winner yet</p>
+</div>
+
+<!-- SYSTEM SETTINGS -->
+<div class="card">
+<h2>⚙️ System Settings</h2>
+<input id="msg" placeholder="Broadcast message">
+<button class="blue" onclick="broadcast()">Send Message</button>
+<p id="status"></p>
+</div>
+
+<!-- ACTIVITY LOG -->
+<div class="card">
+<h2>📊 Activity Monitor</h2>
+<div id="log"></div>
 </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+let data = JSON.parse(localStorage.getItem("platformState")) || {
+users: [],
+log: []
+};
+
+// USERS
+function refreshUsers(){
+document.getElementById("users").innerText = data.users.length;
+log("User data refreshed");
+}
+
+// DRAW
+function runDraw(){
+if(data.users.length === 0){
+document.getElementById("winner").innerText = "No users available";
+return;
+}
+
+let w = data.users[Math.floor(Math.random()*data.users.length)];
+document.getElementById("winner").innerText = "🏆 " + w;
+
+log("Draw executed: " + w);
+}
+
+// BROADCAST
+function broadcast(){
+let m = document.getElementById("msg").value;
+document.getElementById("status").innerText = "Sent: " + m;
+
+log("Broadcast: " + m);
+}
+
+// LOG SYSTEM
+function log(text){
+data.log.push(text);
+if(data.log.length > 20) data.log.shift();
+
+document.getElementById("log").innerHTML =
+data.log.map(l => "• " + l).join("<br>");
+
+localStorage.setItem("platformState", JSON.stringify(data));
+}
+
+// INIT
+refreshUsers();
+log("Admin system loaded");
+
+</script>
 
 </body>
 </html>
