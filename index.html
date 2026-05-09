@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw Pro</title>
+<title>Community Draw Payment System</title>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0}
-header{background:#0a7f39;color:#fff;text-align:center;padding:20px}
+header{background:#0a7f39;color:white;text-align:center;padding:20px}
 .container{max-width:900px;margin:auto;padding:15px}
-.card{background:#fff;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
+.card{background:white;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
 input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
 button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.pay{background:#007bff;color:white}
 .green{background:#0a7f39;color:white}
-.blue{background:#007bff;color:white}
-.red{background:#c0392b;color:white}
 li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
-#winnerBox{margin-top:15px;font-size:22px;font-weight:bold;color:green}
+#winnerBox{font-size:22px;font-weight:bold;color:green;margin-top:10px}
 small{color:gray}
 </style>
 </head>
@@ -24,45 +23,47 @@ small{color:gray}
 <body>
 
 <header>
-<h1>🎉 Community Draw Pro</h1>
-<p>Secure Admin + Winner System</p>
+<h1>💰 Community Draw Entry System</h1>
+<p>Pay R30 → Then Enter Draw</p>
 </header>
 
 <div class="container">
 
-<!-- LOGIN -->
-<div class="card" id="loginBox">
-<h2>🔐 Admin Login</h2>
-<input type="password" id="pass" placeholder="Enter Admin Password">
-<button class="blue" onclick="login()">Login</button>
-<small>Default password: 1234</small>
+<!-- PAYMENT SECTION -->
+<div class="card">
+<h2>1️⃣ Make Payment (R30 Entry Fee)</h2>
+
+<p>Click below to pay your entry fee. After payment, return and enter your name.</p>
+
+<!-- Replace link with your Payfast / payment link -->
+<button class="pay" onclick="window.open('https://www.payfast.co.za/','_blank')">
+💳 Pay R30 Entry Fee
+</button>
+
+<small>
+After payment, continue below to enter draw.
+</small>
 </div>
 
-<!-- APP -->
-<div id="app" style="display:none;">
-
+<!-- ENTRY -->
 <div class="card">
-<h2>Add User</h2>
-<input type="text" id="user" placeholder="Enter name">
+<h2>2️⃣ Enter Draw (After Payment)</h2>
+
+<input type="text" id="user" placeholder="Enter your name">
 <button class="green" onclick="addUser()">Join Draw</button>
 </div>
 
+<!-- USERS -->
 <div class="card">
-<h2>Users</h2>
+<h2>👥 Paid Entries</h2>
 <ul id="list"></ul>
 </div>
 
+<!-- DRAW -->
 <div class="card">
-<h2>🎯 Draw Winner</h2>
+<h2>🎯 Winner Selection</h2>
 <button class="green" onclick="pickWinner()">Pick Winner</button>
 <div id="winnerBox">No winner yet</div>
-</div>
-
-<div class="card">
-<h2>📜 Winner History</h2>
-<ul id="history"></ul>
-</div>
-
 </div>
 
 </div>
@@ -70,35 +71,32 @@ small{color:gray}
 <script>
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
-let history = JSON.parse(localStorage.getItem("history")) || [];
-
-function login(){
-let p = document.getElementById("pass").value;
-if(p === "1234"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("app").style.display="block";
-render();
-}else{
-alert("Wrong password");
-}
-}
 
 function addUser(){
-let name = document.getElementById("user").value.trim();
-if(name === "") return alert("Enter name");
 
-// prevent duplicate
+let name = document.getElementById("user").value.trim();
+
+if(name === ""){
+alert("Enter name");
+return;
+}
+
 if(users.includes(name)){
-return alert("User already exists");
+alert("Already entered");
+return;
 }
 
 users.push(name);
 localStorage.setItem("users", JSON.stringify(users));
+
 document.getElementById("user").value="";
 render();
+
+alert("Entry successful (Make sure payment was done)");
 }
 
 function render(){
+
 let list = document.getElementById("list");
 list.innerHTML="";
 
@@ -108,29 +106,20 @@ li.innerText = (i+1)+". "+u;
 list.appendChild(li);
 });
 
-let h = document.getElementById("history");
-h.innerHTML="";
-
-history.forEach(w=>{
-let li = document.createElement("li");
-li.innerText = "🏆 "+w;
-h.appendChild(li);
-});
 }
 
 function pickWinner(){
-if(users.length === 0) return alert("No users");
+
+if(users.length === 0){
+alert("No entries");
+return;
+}
 
 let w = users[Math.floor(Math.random()*users.length)];
 
 document.getElementById("winnerBox").innerHTML =
 "🏆 WINNER: " + w;
 
-// save history
-history.unshift(w);
-localStorage.setItem("history", JSON.stringify(history));
-
-render();
 }
 
 render();
