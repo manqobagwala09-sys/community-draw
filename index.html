@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Community Draw System</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,7 +12,16 @@
 <header class="header">
 <h1>🎉 Community Draw System</h1>
 <p>Mobile Money Ready • Pay • Enter • Win</p>
+
+<!-- NAVIGATION -->
+<div style="margin-top:10px;">
+<button onclick="goToPage('main')" class="green">🏠 Main Draw</button>
+<button onclick="goToPage('growth')" class="pay">📊 Growth System</button>
+</div>
 </header>
+
+<!-- ================= MAIN PAGE ================= -->
+<div id="mainPage">
 
 <div class="container">
 
@@ -43,16 +51,12 @@ Confirm Entry
 <p id="ticketInfo"></p>
 </div>
 
-<!-- PREMIUM DASHBOARD -->
+<!-- DASHBOARD -->
 <div class="card">
 <h2>📊 Premium Dashboard</h2>
 
 <p>👥 Total Entries: <span id="totalUsers">0</span></p>
-
 <p>💰 Estimated Revenue: R<span id="estimatedRevenue">0</span></p>
-
-<p>🎫 Ticket Price: R30</p>
-
 <p>📈 System Status: <b>Active</b></p>
 
 <small>*Estimated revenue = entries × R30</small>
@@ -73,6 +77,37 @@ Pick Winner
 </button>
 
 <div id="winnerBox">No winner yet</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= GROWTH PAGE ================= -->
+<div id="growthPage" style="display:none;">
+
+<div class="container">
+
+<div class="card">
+<h2>🚀 Growth & Membership System</h2>
+<p>Scalable business structure overview</p>
+</div>
+
+<div class="card">
+<h2>🟢 1. Membership Model</h2>
+<p>R30 monthly subscription system</p>
+</div>
+
+<div class="card">
+<h2>🔵 2. Referral Engine</h2>
+<p>WhatsApp sharing + user growth system</p>
+</div>
+
+<div class="card">
+<h2>🟣 3. Reward Campaign System</h2>
+<p>Promotional rewards funded by business revenue</p>
+</div>
+
 </div>
 
 </div>
