@@ -1,44 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Community Draw</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Draw SA</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4;}
+
+header{
+background:#008000;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+nav{
+background:#222;
+text-align:center;
+padding:10px;
+}
+
+nav a{
+color:white;
+margin:10px;
+text-decoration:none;
+}
+
+.section{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+}
+
+.btn{
+background:#008000;
+color:white;
+padding:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.plan{
+border:2px solid #008000;
+padding:15px;
+margin:10px;
+border-radius:10px;
+text-align:center;
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Community Charity Draw</h1>
-    <p>Win community rewards through monthly participation</p>
-  </header>
+<header>
+<h1>Community Draw SA</h1>
+<p>Win Monthly Rewards</p>
+</header>
 
-  <section class="card">
-    <h2>Join the Draw</h2>
+<nav>
+<a href="#">Home</a>
+<a href="#membership">Membership</a>
+<a href="#">Winners</a>
+<a href="admin.html">Admin</a>
+</nav>
 
-    <form id="joinForm">
-      <input type="text" placeholder="Full Name" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <input type="email" placeholder="Email Address" required>
+<div class="section">
+<h2>Welcome</h2>
+<p>Join the community draw and stand a chance to win monthly prizes.</p>
+</div>
 
-      <button type="submit">Register</button>
-    </form>
-  </section>
+<!-- MEMBERSHIP -->
+<div class="section" id="membership">
+<h2>Membership Plans</h2>
 
-  <section class="card">
-    <h2>Today's Winner</h2>
+<div class="plan">
+<h3>Basic</h3>
+<p>R30 / Month</p>
+<button class="btn">Join</button>
+</div>
 
-    <div id="winnerBox">
-      No winner selected yet
-    </div>
+<div class="plan">
+<h3>Silver</h3>
+<p>R50 / 3 Months</p>
+<button class="btn">Join</button>
+</div>
 
-    <button onclick="pickWinner()">Run Draw</button>
-  </section>
+<div class="plan">
+<h3>Premium</h3>
+<p>R100 / 6 Months</p>
+<button class="btn">Join</button>
+</div>
 
-  <footer>
-    <p>Powered by Community Draw SA</p>
-  </footer>
+</div>
 
-<script src="script.js"></script>
+<!-- WINNER -->
+<div class="section">
+<h2>Today Winner</h2>
+<p>No winner announced yet</p>
+</div>
+
 </body>
 </html>
