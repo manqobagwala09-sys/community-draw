@@ -1,182 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw Pro Business System</title>
+
+<title>Community Draw Cloud System</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;margin:0}
-header{background:#0a7f39;color:white;text-align:center;padding:20px}
-.container{max-width:900px;margin:auto;padding:15px}
-.card{background:white;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
-input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
-button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
-.pay{background:#007bff;color:white}
-.green{background:#0a7f39;color:white}
-.admin{background:#333;color:white}
-li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
-#winnerBox{font-size:22px;font-weight:bold;color:green;margin-top:10px}
-small{color:gray}
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
+
+header{
+background:#0a7f39;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-top:15px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.green{
+background:#0a7f39;
+color:white;
+}
+
+.blue{
+background:#007bff;
+color:white;
+}
+
+li{
+list-style:none;
+padding:10px;
+background:#f7f7f7;
+margin:5px 0;
+border-radius:8px;
+}
+
+#winnerBox{
+font-size:22px;
+font-weight:bold;
+color:green;
+margin-top:10px;
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>💰 Community Draw Business System</h1>
-<p>Pay • Get Ticket • Win Fairly</p>
+<h1>☁ Community Draw Cloud System</h1>
+<p>Firebase Connected</p>
 </header>
 
 <div class="container">
 
-<!-- PAYMENT -->
 <div class="card">
-<h2>1️⃣ Payment</h2>
-<p>Pay R30 to enter draw</p>
 
-<button class="pay" onclick="payNow()">
-💳 Pay R30 Entry
+<h2>💳 Payment Step</h2>
+
+<button class="blue"
+onclick="window.open('https://www.payfast.co.za/','_blank')">
+Pay R30 Entry
 </button>
 
-<small>After payment click confirm below</small>
-
-<button class="green" onclick="confirmPayment()">
-✔ I Have Paid
-</button>
 </div>
 
-<!-- ENTRY -->
 <div class="card">
-<h2>2️⃣ Enter Details</h2>
 
-<input type="text" id="name" placeholder="Enter your name">
+<h2>🎫 Enter Draw</h2>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your name"
+>
 
 <button class="green" onclick="joinDraw()">
-🎫 Join Draw
+Join Draw
 </button>
 
-<small id="ticketInfo">No ticket assigned yet</small>
+<p id="ticket"></p>
+
 </div>
 
-<!-- USERS -->
 <div class="card">
-<h2>📋 Entries (Tickets)</h2>
+
+<h2>👥 Cloud Entries</h2>
+
 <ul id="list"></ul>
+
 </div>
 
-<!-- DRAW -->
 <div class="card">
-<h2>🏆 Winner Selection (Ticket Based)</h2>
-<button class="green" onclick="pickWinner()">Pick Winner</button>
-<div id="winnerBox">No winner yet</div>
-</div>
 
-<!-- ADMIN -->
-<div class="card">
-<h2>📊 Admin Dashboard</h2>
-<p>Total Entries: <span id="total"></span></p>
-<p>Total Revenue: R<span id="rev"></span></p>
+<h2>🏆 Pick Winner</h2>
 
-<button class="admin" onclick="resetAll()">
-Reset System
+<button class="green" onclick="pickWinner()">
+Pick Winner
 </button>
+
+<div id="winnerBox">
+No winner yet
 </div>
 
 </div>
 
-<script>
+<div class="card">
 
-let paid = false;
-let ticketCounter = localStorage.getItem("ticketCounter") || 1000;
+<h2>📊 Dashboard</h2>
 
-let users = JSON.parse(localStorage.getItem("users")) || [];
-let revenue = JSON.parse(localStorage.getItem("revenue")) || 0;
+<p>Total Entries:
+<span id="total">0</span>
+</p>
 
-function payNow(){
-window.open("https://www.payfast.co.za/","_blank");
+<p>Total Revenue:
+R<span id="revenue">0</span>
+</p>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyApsGKl9H1-YHa6bzSTd-CV2qo2iRo4csE",
+authDomain: "community-draw-pro-sa.firebaseapp.com",
+projectId: "community-draw-pro-sa",
+storageBucket: "community-draw-pro-sa.firebasestorage.app",
+messagingSenderId: "428136774811",
+appId: "1:428136774811:web:8265b5e97fcce57d445a3e",
+measurementId: "G-WC7M2VC891"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let entries = [];
+
+async function loadEntries(){
+
+entries = [];
+
+const querySnapshot =
+await getDocs(collection(db, "entries"));
+
+const list =
+document.getElementById("list");
+
+list.innerHTML = "";
+
+querySnapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+entries.push(data);
+
+const li =
+document.createElement("li");
+
+li.innerHTML =
+data.name +
+" | 🎫 Ticket #" +
+data.ticket;
+
+list.appendChild(li);
+
+});
+
+document.getElementById("total").innerText =
+entries.length;
+
+document.getElementById("revenue").innerText =
+entries.length * 30;
+
 }
 
-function confirmPayment(){
-paid = true;
-alert("Payment confirmed (manual verification mode)");
-}
+window.joinDraw = async function(){
 
-function joinDraw(){
-
-if(!paid){
-alert("Please confirm payment first");
-return;
-}
-
-let name = document.getElementById("name").value.trim();
+const name =
+document.getElementById("name").value.trim();
 
 if(name === ""){
 alert("Enter name");
 return;
 }
 
-// create ticket
-ticketCounter++;
-localStorage.setItem("ticketCounter", ticketCounter);
+const ticket =
+Math.floor(100000 + Math.random() * 900000);
 
-let user = {
+await addDoc(collection(db, "entries"), {
 name:name,
-ticket:ticketCounter
-};
-
-users.push(user);
-localStorage.setItem("users", JSON.stringify(users));
-
-// revenue tracking
-revenue += 30;
-localStorage.setItem("revenue", JSON.stringify(revenue));
-
-document.getElementById("name").value="";
-document.getElementById("ticketInfo").innerText =
-"Your Ticket: #" + ticketCounter;
-
-render();
-}
-
-function render(){
-
-let list = document.getElementById("list");
-list.innerHTML="";
-
-users.forEach((u,i)=>{
-let li = document.createElement("li");
-li.innerHTML = (i+1)+". "+u.name+" | 🎫 Ticket #"+u.ticket;
-list.appendChild(li);
+ticket:ticket
 });
 
-document.getElementById("total").innerText = users.length;
-document.getElementById("rev").innerText = revenue;
+document.getElementById("ticket").innerHTML =
+"🎫 Your Ticket: #" + ticket;
+
+document.getElementById("name").value="";
+
+loadEntries();
 
 }
 
-function pickWinner(){
+window.pickWinner = function(){
 
-if(users.length === 0){
+if(entries.length === 0){
 alert("No entries");
 return;
 }
 
-let w = users[Math.floor(Math.random()*users.length)];
+const random =
+entries[Math.floor(Math.random()*entries.length)];
 
 document.getElementById("winnerBox").innerHTML =
-"🏆 WINNER: "+w.name+"<br>🎫 Ticket #"+w.ticket;
+"🏆 WINNER: " +
+random.name +
+"<br>🎫 Ticket #" +
+random.ticket;
 
 }
 
-function resetAll(){
-if(confirm("Reset everything?")){
-localStorage.clear();
-location.reload();
-}
-}
-
-render();
+loadEntries();
 
 </script>
 
