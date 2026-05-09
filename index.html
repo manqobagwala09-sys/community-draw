@@ -34,25 +34,6 @@ padding:10px;
 border:none;
 cursor:pointer;
 }
-
-#formBox{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000000aa;
-}
-
-.form-inner{
-background:white;
-width:90%;
-max-width:400px;
-margin:100px auto;
-padding:20px;
-border-radius:10px;
-}
 </style>
 </head>
 
@@ -92,8 +73,9 @@ border-radius:10px;
 </div>
 
 <!-- FORM -->
-<div id="formBox">
-<div class="form-inner">
+<div id="formBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000aa;">
+
+<div style="background:white;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:10px;">
 
 <h3 id="title">Join</h3>
 
@@ -106,47 +88,60 @@ border-radius:10px;
 </div>
 </div>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-alert("System loaded");
+const firebaseConfig = {
+  apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
+  authDomain: "community-draw-161e8.firebaseapp.com",
+  projectId: "community-draw-161e8",
+  storageBucket: "community-draw-161e8.appspot.com",
+  messagingSenderId: "565703571417",
+  appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 let plan = "";
 
-function openForm(p){
-plan = p;
-document.getElementById("title").innerText = "Join " + p;
-document.getElementById("formBox").style.display = "block";
-}
+window.openForm = function(p){
+  plan = p;
+  document.getElementById("title").innerText = "Join " + p;
+  document.getElementById("formBox").style.display = "block";
+};
 
-function closeForm(){
-document.getElementById("formBox").style.display = "none";
-}
+window.closeForm = function(){
+  document.getElementById("formBox").style.display = "none";
+};
 
-function save(){
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
+window.save = async function(){
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
 
-if(name=="" || phone==""){
-alert("Fill all fields");
-return;
-}
+  if(!name || !phone){
+    alert("Fill all fields");
+    return;
+  }
 
-let data = JSON.parse(localStorage.getItem("members")) || [];
+  try {
+    await addDoc(collection(db, "members"), {
+      name: name,
+      phone: phone,
+      plan: plan,
+      status: "pending",
+      time: new Date()
+    });
 
-data.push({
-name:name,
-phone:phone,
-plan:plan,
-status:"pending"
-});
-
-localStorage.setItem("members", JSON.stringify(data));
-
-alert("Submitted! Send payment proof to admin.");
-closeForm();
-}
-
+    alert("Successfully joined!");
+    closeForm();
+  } catch (e) {
+    alert(e.message);
+  }
+};
 </script>
 
 </body>
-</html>
+  </html>
