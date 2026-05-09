@@ -11,12 +11,13 @@
 
 <header class="header">
 <h1>🎉 Community Draw System</h1>
-<p>Mobile Money Ready • Draw • Growth • Membership</p>
+<p>Draw • Growth • Community Hub</p>
 
 <!-- NAVIGATION -->
 <div style="margin-top:10px;">
 <button onclick="goToPage('main')" class="green">🏠 Main Draw</button>
-<button onclick="goToPage('growth')" class="pay">📊 Growth System</button>
+<button onclick="goToPage('growth')" class="pay">📊 Growth</button>
+<button onclick="goToPage('hub')" class="green">🎮 Hub</button>
 </div>
 </header>
 
@@ -25,53 +26,35 @@
 
 <div class="container">
 
-<!-- PAYMENT -->
 <div class="card">
 <h2>💳 Payment</h2>
 <p>Pay R30 to enter draw</p>
-
-<button class="pay"
-onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
+<button class="pay" onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
 Pay via Payfast
 </button>
 </div>
 
-<!-- ENTRY -->
 <div class="card">
 <h2>🎫 Enter Draw</h2>
-
 <input id="name" placeholder="Enter your name">
-
-<button class="green" onclick="joinDraw()">
-Confirm Entry
-</button>
-
+<button class="green" onclick="joinDraw()">Confirm Entry</button>
 <p id="ticketInfo"></p>
 </div>
 
-<!-- DASHBOARD -->
 <div class="card">
-<h2>📊 Premium Dashboard</h2>
-
-<p>👥 Total Entries: <span id="totalUsers">0</span></p>
-<p>💰 Estimated Revenue: R<span id="estimatedRevenue">0</span></p>
-<p>📈 Status: <b>Active</b></p>
+<h2>📊 Dashboard</h2>
+<p>👥 Entries: <span id="totalUsers">0</span></p>
+<p>💰 Revenue: R<span id="estimatedRevenue">0</span></p>
 </div>
 
-<!-- ENTRIES -->
 <div class="card">
-<h2>👥 Live Entries</h2>
+<h2>👥 Live Users</h2>
 <ul id="userList"></ul>
 </div>
 
-<!-- WINNER -->
 <div class="card">
-<h2>🏆 Winner System</h2>
-
-<button class="green" onclick="pickWinner()">
-Pick Winner
-</button>
-
+<h2>🏆 Winner</h2>
+<button class="green" onclick="pickWinner()">Pick Winner</button>
 <div id="winnerBox">No winner yet</div>
 </div>
 
@@ -84,54 +67,72 @@ Pick Winner
 
 <div class="container">
 
-<!-- MEMBERSHIP -->
 <div class="card">
-<h2>💳 Membership Status</h2>
-<p>Status: <b>Active Demo Member</b></p>
-<p>Plan: R30 Monthly Tier</p>
+<h2>🚀 Growth Engine</h2>
+<p>Referral & Membership System</p>
 </div>
 
-<!-- REFERRAL -->
+<div class="card">
+<h2>💳 Membership</h2>
+<p>R30 Monthly Tier Active</p>
+</div>
+
 <div class="card">
 <h2>🔗 Referral System</h2>
-
-<p>Your Referral Link:</p>
-
 <input id="refLink" readonly>
-
-<button class="green" onclick="generateLinkSafe()">
-Generate Link
-</button>
-
-<button class="pay" onclick="copyLinkSafe()">
-Copy Link
-</button>
-
+<button class="green" onclick="generateLinkSafe()">Generate</button>
+<button class="pay" onclick="copyLinkSafe()">Copy</button>
 </div>
 
-<!-- PROGRESS -->
 <div class="card">
-<h2>📊 Growth Progress</h2>
-
+<h2>📊 Progress</h2>
 <p>Invites: <span id="invites">0</span></p>
-<p>Target: 5 invites</p>
 
-<div style="background:#ddd;height:10px;border-radius:6px;overflow:hidden;">
+<div style="background:#ddd;height:10px;border-radius:6px;">
 <div id="bar" style="width:0%;height:10px;background:#10b981;"></div>
 </div>
 
 </div>
 
-<!-- LEADERBOARD -->
 <div class="card">
-<h2>🏆 Leaderboard (Demo)</h2>
-
+<h2>🏆 Leaderboard</h2>
 <ul id="board"></ul>
+<button class="green" onclick="simulateInviteSafe()">Simulate Invite</button>
+</div>
 
-<button class="green" onclick="simulateInviteSafe()">
-Simulate Invite
-</button>
+</div>
 
+</div>
+
+<!-- ================= COMMUNITY HUB PAGE ================= -->
+<div id="hubPage" style="display:none;">
+
+<div class="container">
+
+<div class="card">
+<h2>🎮 Community Hub</h2>
+<p>Engagement, predictions & rewards system</p>
+</div>
+
+<div class="card">
+<h2>⚽ Soccer Predictions</h2>
+<button class="green" onclick="addPoint('prediction')">Predict Match</button>
+<p>Points: <span id="points">0</span></p>
+</div>
+
+<div class="card">
+<h2>👥 Team Challenges</h2>
+<button class="pay" onclick="addPoint('team')">Join Challenge</button>
+</div>
+
+<div class="card">
+<h2>🎁 Daily Reward</h2>
+<button class="green" onclick="addPoint('reward')">Claim Reward</button>
+</div>
+
+<div class="card">
+<h2>🏆 Hub Leaderboard</h2>
+<ul id="hubBoard"></ul>
 </div>
 
 </div>
