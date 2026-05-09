@@ -1,81 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Community Draw Cloud System</title>
+<title>Community Draw</title>
 
 <style>
-body{
-font-family:Arial;
-background:#f4f4f4;
-margin:0;
-}
-
-header{
-background:#0a7f39;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:15px;
-}
-
-.card{
-background:white;
-padding:20px;
-margin-top:15px;
-border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.green{
-background:#0a7f39;
-color:white;
-}
-
-.blue{
-background:#007bff;
-color:white;
-}
-
-li{
-list-style:none;
-padding:10px;
-background:#f7f7f7;
-margin:5px 0;
-border-radius:8px;
-}
-
-#winnerBox{
-font-size:22px;
-font-weight:bold;
-color:green;
-margin-top:10px;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0}
+header{background:#0a7f39;color:white;text-align:center;padding:20px}
+.container{max-width:900px;margin:auto;padding:15px}
+.card{background:white;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
+input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.pay{background:#007bff;color:white}
+.green{background:#0a7f39;color:white}
+li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
+#winnerBox{font-size:22px;font-weight:bold;color:green;margin-top:10px}
 </style>
 
 </head>
@@ -83,191 +23,111 @@ margin-top:10px;
 <body>
 
 <header>
-<h1>☁ Community Draw Cloud System</h1>
-<p>Firebase Connected</p>
+<h1>🎉 Community Draw</h1>
+<p>Pay • Enter • Win</p>
 </header>
 
 <div class="container">
 
+<!-- PAYMENT -->
 <div class="card">
+<h2>💳 Step 1: Pay Entry Fee</h2>
 
-<h2>💳 Payment Step</h2>
+<p>Pay R30 to join the draw</p>
 
-<button class="blue"
-onclick="window.open('https://www.payfast.co.za/','_blank')">
-Pay R30 Entry
+<button class="pay"
+onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
+Pay R30 Now
 </button>
 
 </div>
 
+<!-- ENTRY -->
 <div class="card">
+<h2>🎫 Step 2: Enter Name</h2>
 
-<h2>🎫 Enter Draw</h2>
+<input type="text" id="name" placeholder="Enter your name">
 
-<input
-type="text"
-id="name"
-placeholder="Enter your name"
->
-
-<button class="green" onclick="joinDraw()">
+<button class="green" onclick="addUser()">
 Join Draw
 </button>
 
-<p id="ticket"></p>
-
 </div>
 
+<!-- USERS -->
 <div class="card">
-
-<h2>👥 Cloud Entries</h2>
-
+<h2>👥 Entries</h2>
 <ul id="list"></ul>
-
 </div>
 
+<!-- DRAW -->
 <div class="card">
-
-<h2>🏆 Pick Winner</h2>
+<h2>🏆 Winner</h2>
 
 <button class="green" onclick="pickWinner()">
 Pick Winner
 </button>
 
-<div id="winnerBox">
-No winner yet
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>📊 Dashboard</h2>
-
-<p>Total Entries:
-<span id="total">0</span>
-</p>
-
-<p>Total Revenue:
-R<span id="revenue">0</span>
-</p>
+<div id="winnerBox">No winner yet</div>
 
 </div>
 
 </div>
 
-<script type="module">
+<script>
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-import {
-getFirestore,
-collection,
-addDoc,
-getDocs
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+function addUser(){
 
-const firebaseConfig = {
-apiKey: "AIzaSyApsGKl9H1-YHa6bzSTd-CV2qo2iRo4csE",
-authDomain: "community-draw-pro-sa.firebaseapp.com",
-projectId: "community-draw-pro-sa",
-storageBucket: "community-draw-pro-sa.firebasestorage.app",
-messagingSenderId: "428136774811",
-appId: "1:428136774811:web:8265b5e97fcce57d445a3e",
-measurementId: "G-WC7M2VC891"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-let entries = [];
-
-async function loadEntries(){
-
-entries = [];
-
-const querySnapshot =
-await getDocs(collection(db, "entries"));
-
-const list =
-document.getElementById("list");
-
-list.innerHTML = "";
-
-querySnapshot.forEach((doc)=>{
-
-const data = doc.data();
-
-entries.push(data);
-
-const li =
-document.createElement("li");
-
-li.innerHTML =
-data.name +
-" | 🎫 Ticket #" +
-data.ticket;
-
-list.appendChild(li);
-
-});
-
-document.getElementById("total").innerText =
-entries.length;
-
-document.getElementById("revenue").innerText =
-entries.length * 30;
-
-}
-
-window.joinDraw = async function(){
-
-const name =
-document.getElementById("name").value.trim();
+let name = document.getElementById("name").value.trim();
 
 if(name === ""){
 alert("Enter name");
 return;
 }
 
-const ticket =
-Math.floor(100000 + Math.random() * 900000);
+if(users.includes(name)){
+alert("Already entered");
+return;
+}
 
-await addDoc(collection(db, "entries"), {
-name:name,
-ticket:ticket
-});
-
-document.getElementById("ticket").innerHTML =
-"🎫 Your Ticket: #" + ticket;
+users.push(name);
+localStorage.setItem("users", JSON.stringify(users));
 
 document.getElementById("name").value="";
-
-loadEntries();
+render();
 
 }
 
-window.pickWinner = function(){
+function render(){
 
-if(entries.length === 0){
+let list = document.getElementById("list");
+list.innerHTML="";
+
+users.forEach((u,i)=>{
+let li = document.createElement("li");
+li.innerText = (i+1)+". "+u;
+list.appendChild(li);
+});
+
+}
+
+function pickWinner(){
+
+if(users.length === 0){
 alert("No entries");
 return;
 }
 
-const random =
-entries[Math.floor(Math.random()*entries.length)];
+let w = users[Math.floor(Math.random()*users.length)];
 
 document.getElementById("winnerBox").innerHTML =
-"🏆 WINNER: " +
-random.name +
-"<br>🎫 Ticket #" +
-random.ticket;
+"🏆 WINNER: " + w;
 
 }
 
-loadEntries();
+render();
 
 </script>
 
