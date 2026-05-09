@@ -3,89 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Global Community Platform</title>
-<link rel="stylesheet" href="style.css">
+<title>NEON CORE SYSTEM</title>
+
+<style>
+/* =========================
+   FUTURE CORE UI ENGINE
+========================= */
+
+body{
+margin:0;
+font-family: system-ui, Arial;
+background: radial-gradient(circle at top,#0b1220,#05070f);
+color:#e5e7eb;
+}
+
+header{
+padding:25px;
+text-align:center;
+background:rgba(255,255,255,0.03);
+backdrop-filter: blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+h1{
+margin:0;
+font-size:28px;
+letter-spacing:2px;
+}
+
+nav{
+margin-top:15px;
+}
+
+button{
+padding:10px 14px;
+margin:5px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.neon{
+background:#0ea5e9;
+color:white;
+box-shadow:0 0 15px rgba(14,165,233,0.4);
+}
+
+.green{
+background:#10b981;
+color:white;
+box-shadow:0 0 15px rgba(16,185,129,0.4);
+}
+
+.purple{
+background:#8b5cf6;
+color:white;
+box-shadow:0 0 15px rgba(139,92,246,0.4);
+}
+
+.container{
+padding:20px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+padding:15px;
+margin:12px 0;
+border-radius:15px;
+backdrop-filter: blur(8px);
+}
+
+input{
+width:95%;
+padding:10px;
+border-radius:10px;
+border:none;
+margin:5px 0;
+background:#111827;
+color:white;
+}
+
+.glow{
+text-shadow:0 0 10px rgba(255,255,255,0.3);
+}
+
+.small{
+opacity:0.7;
+font-size:13px;
+}
+</style>
+
 </head>
 
 <body>
 
-<header class="header">
-<h1>🌍 Global Community Platform</h1>
-<p>Membership • Games • Chess • Rewards</p>
+<header>
+<h1 class="glow">⚡ NEON CORE PLATFORM</h1>
+<p class="small">Next Generation Digital System Architecture</p>
 
-<div>
-<button onclick="goTo('main')" class="green">🏠 Main</button>
-<button onclick="goTo('growth')" class="pay">📊 Growth</button>
-<button onclick="goTo('hub')" class="green">🎮 Hub</button>
-</div>
+<nav>
+<button class="neon" onclick="show('home')">HOME</button>
+<button class="green" onclick="show('engine')">ENGINE</button>
+<button class="purple" onclick="show('core')">CORE DATA</button>
+</nav>
 </header>
 
-<!-- PAGE 1 -->
-<div id="main">
+<!-- ================= HOME ================= -->
+<div id="home" class="container">
 
 <div class="card">
-<h2>🎫 Entry System</h2>
-<input id="name" placeholder="Enter username">
-<button class="green" onclick="join()">Join</button>
-</div>
-
-<div class="card">
-<h2>🏆 Draw System</h2>
-<button class="green" onclick="pick()">Pick Winner</button>
-<div id="winner"></div>
+<h2>🌍 System Overview</h2>
+<p>This is a modular global-ready platform architecture designed for scale, intelligence layering, and future AI integration.</p>
 </div>
 
 <div class="card">
-<h2>📊 Dashboard</h2>
-<p>Users: <span id="count">0</span></p>
+<h2>🚀 Launch Protocol</h2>
+<button class="neon" onclick="alert('System Initialized ✔')">
+Initialize Core
+</button>
 </div>
 
 </div>
 
-<!-- PAGE 2 -->
-<div id="growth" style="display:none">
+<!-- ================= ENGINE ================= -->
+<div id="engine" class="container" style="display:none">
 
 <div class="card">
-<h2>💳 Membership System</h2>
-<p>30-Day Subscription Model</p>
-</div>
-
-<div class="card">
-<h2>🔗 Referral System</h2>
-<button onclick="ref()">Generate Link</button>
-<input id="link" readonly>
-</div>
-
-<div class="card">
-<h2>📈 Progress</h2>
-<p>Invites: <span id="inv">0</span></p>
-</div>
-
-</div>
-
-<!-- PAGE 3 -->
-<div id="hub" style="display:none">
-
-<div class="card">
-<h2>♟️ Chess Arena</h2>
-<p>Ranked matches + leaderboard system</p>
-<button onclick="game('chess')">Play Chess</button>
+<h2>⚙️ Modular Engine</h2>
+<ul>
+<li>UI Layer System</li>
+<li>Interaction Engine</li>
+<li>Scalable Component Blocks</li>
+<li>Future API Ready Design</li>
+</ul>
 </div>
 
 <div class="card">
-<h2>🎮 Game Hub</h2>
-<p>Prediction + Fishing + Simulation games</p>
-<button onclick="game('predict')">Play</button>
+<h2>🧠 Input Node</h2>
+<input id="node" placeholder="Enter system node">
+<button class="green" onclick="addNode()">Activate Node</button>
+</div>
+
+</div>
+
+<!-- ================= CORE ================= -->
+<div id="core" class="container" style="display:none">
+
+<div class="card">
+<h2>📊 Core Data System</h2>
+<p>Active Nodes: <span id="count">0</span></p>
 </div>
 
 <div class="card">
-<h2>🎬 Content Hub</h2>
-<p>Netflix-style engagement feed</p>
+<h2>🔐 Execution Layer</h2>
+<button class="purple" onclick="runCore()">Run Core Simulation</button>
 </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+let nodes = [];
+
+// NAV SYSTEM
+function show(page){
+document.getElementById("home").style.display="none";
+document.getElementById("engine").style.display="none";
+document.getElementById("core").style.display="none";
+
+document.getElementById(page).style.display="block";
+}
+
+// NODE SYSTEM
+function addNode(){
+let n = document.getElementById("node").value;
+if(!n) return;
+
+nodes.push(n);
+document.getElementById("count").innerText = nodes.length;
+}
+
+// CORE ENGINE
+function runCore(){
+alert("Neon Core Simulation Running ✔");
+}
+
+</script>
 
 </body>
-                                       </html>
+  </html>
