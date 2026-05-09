@@ -45,8 +45,23 @@ cursor:pointer;
 border-radius:5px;
 }
 
-.approve{background:green;color:white;}
-.reject{background:red;color:white;}
+.approve{
+background:green;
+color:white;
+}
+
+.reject{
+background:red;
+color:white;
+}
+
+.winnerBtn{
+background:gold;
+color:black;
+padding:12px;
+margin-top:10px;
+font-weight:bold;
+}
 </style>
 </head>
 
@@ -54,6 +69,16 @@ border-radius:5px;
 
 <h1>Admin Dashboard</h1>
 
+<!-- WINNER SECTION -->
+<div style="text-align:center;margin:20px;">
+<button class="winnerBtn" onclick="pickWinner()">
+Pick Winner
+</button>
+
+<h2 id="winnerBox">No winner selected</h2>
+</div>
+
+<!-- MEMBERS TABLE -->
 <table>
 <thead>
 <tr>
@@ -66,74 +91,99 @@ border-radius:5px;
 </thead>
 
 <tbody id="dataBody">
-<tr><td colspan="5">Loading...</td></tr>
+<tr>
+<td colspan="5">Loading...</td>
+</tr>
 </tbody>
 </table>
 
 <!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* FIREBASE CONFIG */
 const firebaseConfig = {
-  apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
-  authDomain: "community-draw-161e8.firebaseapp.com",
-  projectId: "community-draw-161e8",
-  storageBucket: "community-draw-161e8.appspot.com",
-  messagingSenderId: "565703571417",
-  appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
+apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
+authDomain: "community-draw-161e8.firebaseapp.com",
+projectId: "community-draw-161e8",
+storageBucket: "community-draw-161e8.appspot.com",
+messagingSenderId: "565703571417",
+appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
 };
 
+/* INIT FIREBASE */
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* LOAD USERS */
+/* LOAD MEMBERS */
 async function loadMembers(){
-  const table = document.getElementById("dataBody");
-  const snapshot = await getDocs(collection(db, "members"));
 
-  let html = "";
+const table = document.getElementById("dataBody");
 
-  snapshot.forEach((d) => {
-    const data = d.data();
+const snapshot =
+await getDocs(collection(db, "members"));
 
-    html += `
-      <tr>
-        <td>${data.name || ""}</td>
-        <td>${data.phone || ""}</td>
-        <td>${data.plan || ""}</td>
-        <td>${data.status || "pending"}</td>
-        <td>
-          <button class="approve" onclick="approve('${d.id}')">Approve</button>
-          <button class="reject" onclick="reject('${d.id}')">Reject</button>
-        </td>
-      </tr>
-    `;
-  });
+let html = "";
 
-  if(html === ""){
-    table.innerHTML = "<tr><td colspan='5'>No members yet</td></tr>";
-  } else {
-    table.innerHTML = html;
-  }
+snapshot.forEach((d) => {
+
+const data = d.data();
+
+html += `
+<tr>
+<td>${data.name || ""}</td>
+<td>${data.phone || ""}</td>
+<td>${data.plan || ""}</td>
+<td>${data.status || "pending"}</td>
+
+<td>
+<button class="approve"
+onclick="approve('${d.id}')">
+Approve
+</button>
+
+<button class="reject"
+onclick="reject('${d.id}')">
+Reject
+</button>
+</td>
+</tr>
+`;
+
+});
+
+if(html === ""){
+table.innerHTML =
+"<tr><td colspan='5'>No members yet</td></tr>";
+}else{
+table.innerHTML = html;
 }
 
-/* APPROVE */
-window.approve = async function(id){
-  const ref = doc(db, "members", id);
-  await updateDoc(ref, { status: "approved" });
-  loadMembers();
-};
+}
 
-/* REJECT */
-window.reject = async function(id){
-  const ref = doc(db, "members", id);
-  await updateDoc(ref, { status: "rejected" });
-  loadMembers();
-};
+/* APPROVE USER */
+window.approve = async function(id){
+
+const ref = doc(db, "members", id);
+
+await updateDoc(ref, {
+status: "approved"
+});
 
 loadMembers();
-</script>
 
-</body>
-</html>
+};
+
+/* REJECT USER */
+window.reject = async function(id){
+
+const ref = doc
