@@ -1,117 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel - Community Draw</title>
+<title>Admin Dashboard - Community Draw</title>
 
 <style>
 body{
 font-family:Arial;
 background:#111;
 color:white;
-text-align:center;
 margin:0;
 padding:20px;
 }
 
-.box{
-background:#222;
-padding:20px;
-border-radius:10px;
-max-width:400px;
-margin:80px auto;
+h1{
+text-align:center;
+color:#00ff88;
 }
 
-input,button{
-width:90%;
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th, td{
+border:1px solid #333;
 padding:10px;
-margin:10px 0;
-border:none;
-border-radius:5px;
+text-align:center;
+}
+
+th{
+background:#222;
+}
+
+tr{
+background:#1a1a1a;
 }
 
 button{
-background:green;
-color:white;
+padding:6px 10px;
+margin:2px;
+border:none;
 cursor:pointer;
+border-radius:5px;
 }
 
-#dashboard{
-display:none;
-}
-
-.member{
-background:#333;
-margin:10px;
-padding:10px;
-border-radius:8px;
-text-align:left;
-}
+.approve{background:green;color:white;}
+.reject{background:red;color:white;}
 </style>
 </head>
 
 <body>
 
-<h1>Admin Panel</h1>
+<h1>Admin Dashboard</h1>
 
-<!-- LOGIN -->
-<div class="box" id="loginBox">
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>Plan</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
 
-<!-- DASHBOARD -->
-<div id="dashboard">
+<tbody id="dataBody">
+<tr><td colspan="5">Loading...</td></tr>
+</tbody>
+</table>
 
-<h2>Members List</h2>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<div id="list"></div>
+const firebaseConfig = {
+  apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
+  authDomain: "community-draw-161e8.firebaseapp.com",
+  projectId: "community-draw-161e8",
+  storageBucket: "community-draw-161e8.appspot.com",
+  messagingSenderId: "565703571417",
+  appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
+};
 
-<button onclick="loadMembers()">Refresh</button>
-<button onclick="logout()">Logout</button>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-</div>
+/* LOAD USERS */
+async function loadMembers(){
+  const table = document.getElementById("dataBody");
+  const snapshot = await getDocs(collection(db, "members"));
 
-<script>
+  let html = "";
 
-function login(){
-let u = document.getElementById("user").value;
-let p = document.getElementById("pass").value;
+  snapshot.forEach((d) => {
+    const data = d.data();
 
-if(u==="admin" && p==="1234"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("dashboard").style.display="block";
+    html += `
+      <tr>
+        <td>${data.name || ""}</td>
+        <td>${data.phone || ""}</td>
+        <td>${data.plan || ""}</td>
+        <td>${data.status || "pending"}</td>
+        <td>
+          <button class="approve" onclick="approve('${d.id}')">Approve</button>
+          <button class="reject" onclick="reject('${d.id}')">Reject</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  if(html === ""){
+    table.innerHTML = "<tr><td colspan='5'>No members yet</td></tr>";
+  } else {
+    table.innerHTML = html;
+  }
+}
+
+/* APPROVE */
+window.approve = async function(id){
+  const ref = doc(db, "members", id);
+  await updateDoc(ref, { status: "approved" });
+  loadMembers();
+};
+
+/* REJECT */
+window.reject = async function(id){
+  const ref = doc(db, "members", id);
+  await updateDoc(ref, { status: "rejected" });
+  loadMembers();
+};
+
 loadMembers();
-}else{
-alert("Wrong login details");
-}
-}
-
-function logout(){
-document.getElementById("loginBox").style.display="block";
-document.getElementById("dashboard").style.display="none";
-}
-
-function loadMembers(){
-let members = JSON.parse(localStorage.getItem("members")) || [];
-
-let output = "";
-
-members.forEach((m,i)=>{
-output += `
-<div class="member">
-<p><b>Name:</b> ${m.name}</p>
-<p><b>Phone:</b> ${m.phone}</p>
-<p><b>Plan:</b> ${m.plan}</p>
-<p><b>Status:</b> ${m.status}</p>
-</div>
-`;
-});
-
-document.getElementById("list").innerHTML =
-output || "No members yet";
-}
-
 </script>
 
 </body>
