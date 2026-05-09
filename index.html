@@ -3,37 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw Pro System</title>
+<title>Community Draw Pro Business</title>
 
 <style>
 body{font-family:Arial;margin:0;background:#f4f4f4}
-header{background:#0a7f39;color:white;text-align:center;padding:20px}
+header{background:#0a7f39;color:white;text-align:center;padding:25px}
 .container{max-width:900px;margin:auto;padding:15px}
-.card{background:white;padding:20px;margin-top:15px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
-input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
-button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+
+.card{
+background:white;
+padding:20px;
+margin-top:15px;
+border-radius:14px;
+box-shadow:0 0 12px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
 .pay{background:#007bff;color:white}
 .green{background:#0a7f39;color:white}
-.whatsapp{background:#25D366;color:white}
-li{list-style:none;padding:10px;background:#f7f7f7;margin:5px 0;border-radius:8px}
-#winnerBox{font-size:22px;font-weight:bold;color:green;margin-top:10px}
+.share{background:#25D366;color:white}
+
+li{
+list-style:none;
+padding:10px;
+margin:5px 0;
+background:#f7f7f7;
+border-radius:8px;
+}
+
+#winnerBox{
+font-size:22px;
+font-weight:bold;
+color:green;
+margin-top:10px;
+}
+
 small{color:gray}
 </style>
-
 </head>
 
 <body>
 
 <header>
 <h1>🎉 Community Draw Pro</h1>
-<p>Pay • Enter • Win • Share</p>
+<p>Pay • Enter • Win • Share • Grow</p>
 </header>
 
 <div class="container">
 
 <!-- PAYMENT -->
 <div class="card">
-<h2>💳 Step 1: Pay Entry</h2>
+<h2>💳 Payment Entry</h2>
 
 <p>R30 Entry Fee</p>
 
@@ -42,16 +79,17 @@ onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
 Pay Now
 </button>
 
-<small>After payment, enter your details below</small>
+<small>After payment, continue below</small>
 </div>
 
 <!-- ENTRY -->
 <div class="card">
-<h2>🎫 Step 2: Enter Draw</h2>
+<h2>🎫 Enter Draw</h2>
 
-<input type="text" id="name" placeholder="Enter your name">
+<input id="name" placeholder="Enter your name">
+<input id="ref" placeholder="Referral code (optional)">
 
-<button class="green" onclick="addUser()">
+<button class="green" onclick="joinDraw()">
 Join Draw
 </button>
 
@@ -77,18 +115,16 @@ Pick Winner
 
 </div>
 
-<!-- HISTORY -->
+<!-- VIRAL SHARE -->
 <div class="card">
-<h2>📜 Winner History</h2>
-<ul id="history"></ul>
-</div>
+<h2>📲 Grow & Earn</h2>
 
-<!-- WHATSAPP -->
-<div class="card">
-<h2>📲 Share & Grow</h2>
+<p>Share your referral link:</p>
 
-<button class="whatsapp"
-onclick="window.open('https://wa.me/?text=Join%20Community%20Draw%20and%20win%20cash!','_blank')">
+<p id="myLink"></p>
+
+<button class="share"
+onclick="share()">
 Share on WhatsApp
 </button>
 
@@ -99,13 +135,12 @@ Share on WhatsApp
 <script>
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
-let history = JSON.parse(localStorage.getItem("history")) || [];
+let referrals = JSON.parse(localStorage.getItem("referrals")) || {};
 
-let ticket = 1000;
-
-function addUser(){
+function joinDraw(){
 
 let name = document.getElementById("name").value.trim();
+let ref = document.getElementById("ref").value.trim();
 
 if(name === ""){
 alert("Enter name");
@@ -117,15 +152,20 @@ alert("Already entered");
 return;
 }
 
-ticket++;
 users.push(name);
-
 localStorage.setItem("users", JSON.stringify(users));
 
+// referral tracking
+if(ref){
+referrals[ref] = (referrals[ref] || 0) + 1;
+localStorage.setItem("referrals", JSON.stringify(referrals));
+}
+
 document.getElementById("ticketInfo").innerText =
-"🎫 Ticket #" + ticket;
+"🎫 Entry confirmed for " + name;
 
 document.getElementById("name").value="";
+document.getElementById("ref").value="";
 
 render();
 
@@ -142,14 +182,10 @@ li.innerText=(i+1)+". "+u;
 list.appendChild(li);
 });
 
-let h=document.getElementById("history");
-h.innerHTML="";
+let link =
+window.location.href + "?ref=" + (users[0] || "user");
 
-history.forEach(w=>{
-let li=document.createElement("li");
-li.innerText="🏆 "+w;
-h.appendChild(li);
-});
+document.getElementById("myLink").innerText = link;
 
 }
 
@@ -165,10 +201,17 @@ let w = users[Math.floor(Math.random()*users.length)];
 document.getElementById("winnerBox").innerHTML =
 "🏆 WINNER: " + w;
 
-history.unshift(w);
-localStorage.setItem("history", JSON.stringify(history));
+}
 
-render();
+function share(){
+
+let link =
+window.location.href;
+
+window.open(
+"https://wa.me/?text=Join%20Community%20Draw%20here:%20" + link,
+"_blank"
+);
 
 }
 
@@ -177,4 +220,4 @@ render();
 </script>
 
 </body>
-</html>
+  </html>
