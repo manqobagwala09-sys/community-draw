@@ -11,7 +11,7 @@
 
 <header class="header">
 <h1>🎉 Community Draw System</h1>
-<p>Mobile Money Ready • Pay • Enter • Win</p>
+<p>Mobile Money Ready • Draw • Growth • Membership</p>
 
 <!-- NAVIGATION -->
 <div style="margin-top:10px;">
@@ -28,14 +28,12 @@
 <!-- PAYMENT -->
 <div class="card">
 <h2>💳 Payment</h2>
-<p>Pay R30 to activate entry</p>
+<p>Pay R30 to enter draw</p>
 
 <button class="pay"
 onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
 Pay via Payfast
 </button>
-
-<small>Continue after payment</small>
 </div>
 
 <!-- ENTRY -->
@@ -57,9 +55,7 @@ Confirm Entry
 
 <p>👥 Total Entries: <span id="totalUsers">0</span></p>
 <p>💰 Estimated Revenue: R<span id="estimatedRevenue">0</span></p>
-<p>📈 System Status: <b>Active</b></p>
-
-<small>*Estimated revenue = entries × R30</small>
+<p>📈 Status: <b>Active</b></p>
 </div>
 
 <!-- ENTRIES -->
@@ -88,24 +84,54 @@ Pick Winner
 
 <div class="container">
 
+<!-- MEMBERSHIP -->
 <div class="card">
-<h2>🚀 Growth & Membership System</h2>
-<p>Scalable business structure overview</p>
+<h2>💳 Membership Status</h2>
+<p>Status: <b>Active Demo Member</b></p>
+<p>Plan: R30 Monthly Tier</p>
 </div>
 
+<!-- REFERRAL -->
 <div class="card">
-<h2>🟢 1. Membership Model</h2>
-<p>R30 monthly subscription system</p>
+<h2>🔗 Referral System</h2>
+
+<p>Your Referral Link:</p>
+
+<input id="refLink" readonly>
+
+<button class="green" onclick="generateLinkSafe()">
+Generate Link
+</button>
+
+<button class="pay" onclick="copyLinkSafe()">
+Copy Link
+</button>
+
 </div>
 
+<!-- PROGRESS -->
 <div class="card">
-<h2>🔵 2. Referral Engine</h2>
-<p>WhatsApp sharing + user growth system</p>
+<h2>📊 Growth Progress</h2>
+
+<p>Invites: <span id="invites">0</span></p>
+<p>Target: 5 invites</p>
+
+<div style="background:#ddd;height:10px;border-radius:6px;overflow:hidden;">
+<div id="bar" style="width:0%;height:10px;background:#10b981;"></div>
 </div>
 
+</div>
+
+<!-- LEADERBOARD -->
 <div class="card">
-<h2>🟣 3. Reward Campaign System</h2>
-<p>Promotional rewards funded by business revenue</p>
+<h2>🏆 Leaderboard (Demo)</h2>
+
+<ul id="board"></ul>
+
+<button class="green" onclick="simulateInviteSafe()">
+Simulate Invite
+</button>
+
 </div>
 
 </div>
@@ -115,4 +141,4 @@ Pick Winner
 <script src="script.js"></script>
 
 </body>
-</html>
+  </html>
