@@ -34,6 +34,25 @@ padding:10px;
 border:none;
 cursor:pointer;
 }
+
+#formBox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000000aa;
+}
+
+.form-inner{
+background:white;
+width:90%;
+max-width:400px;
+margin:100px auto;
+padding:20px;
+border-radius:10px;
+}
 </style>
 </head>
 
@@ -73,9 +92,8 @@ cursor:pointer;
 </div>
 
 <!-- FORM -->
-<div id="formBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000aa;">
-
-<div style="background:white;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:10px;">
+<div id="formBox">
+<div class="form-inner">
 
 <h3 id="title">Join</h3>
 
@@ -89,6 +107,8 @@ cursor:pointer;
 </div>
 
 <script>
+
+alert("System loaded");
 
 let plan = "";
 
