@@ -1,146 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Community Draw SA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Community Charity Draw</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f4f4f4;}
+
+body{
+font-family:Arial, sans-serif;
+background:#f4f4f4;
+margin:0;
+padding:0;
+}
 
 header{
-background:#008000;
+background:#0a7f39;
 color:white;
+padding:25px;
 text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
 padding:20px;
 }
 
-.section{
+.card{
 background:white;
-margin:20px;
 padding:20px;
-border-radius:10px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+margin-top:20px;
 }
 
-.plan{
-border:2px solid #008000;
-padding:15px;
-margin:10px;
-border-radius:10px;
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 button{
-background:#008000;
+width:100%;
+padding:14px;
+margin-top:12px;
+background:#0a7f39;
 color:white;
-padding:10px;
 border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:bold;
 cursor:pointer;
 }
+
+button:hover{
+opacity:0.9;
+}
+
+ul{
+padding:0;
+}
+
+li{
+list-style:none;
+background:#f7f7f7;
+padding:12px;
+margin-bottom:8px;
+border-radius:8px;
+}
+
+#winnerBox{
+margin-top:20px;
+padding:20px;
+background:#fff3cd;
+border-radius:12px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+margin-top:30px;
+background:#222;
+color:white;
+}
+
+.whatsapp{
+background:#25D366;
+}
+
+.pay{
+background:#0066cc;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Community Draw SA</h1>
-<p>Membership System</p>
+<h1>🎉 Community Charity Draw</h1>
+<p>Support Community • Stand A Chance To Win</p>
 </header>
 
-<div class="section">
-<h2>Membership Plans</h2>
+<div class="container">
 
-<div class="plan">
-<h3>Basic</h3>
-<p>R30 / Month</p>
-<button onclick="openForm('Basic')">Join</button>
-</div>
+<div class="card">
 
-<div class="plan">
-<h3>Silver</h3>
-<p>R50 / 3 Months</p>
-<button onclick="openForm('Silver')">Join</button>
-</div>
+<h2>Join The Draw</h2>
 
-<div class="plan">
-<h3>Premium</h3>
-<p>R100 / 6 Months</p>
-<button onclick="openForm('Premium')">Join</button>
-</div>
+<p>
+Enter your name below to participate in the community charity draw.
+</p>
 
-</div>
+<input
+type="text"
+id="newUser"
+placeholder="Enter your full name"
+>
 
-<div class="section">
-<h2>Today Winner</h2>
-<p>No winner yet</p>
-</div>
-
-<!-- FORM -->
-<div id="formBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000aa;">
-
-<div style="background:white;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:10px;">
-
-<h3 id="title">Join</h3>
-
-<input id="name" placeholder="Name" style="width:100%;padding:10px;margin:5px;"><br>
-<input id="phone" placeholder="Phone" style="width:100%;padding:10px;margin:5px;"><br>
-
-<button onclick="save()">Submit</button>
-<button onclick="closeForm()">Close</button>
+<button onclick="addUser()">
+✅ Join Draw
+</button>
 
 </div>
+
+<div class="card">
+
+<h2>👥 Registered Members</h2>
+
+<ul id="userList"></ul>
+
 </div>
 
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<div class="card">
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
-  authDomain: "community-draw-161e8.firebaseapp.com",
-  projectId: "community-draw-161e8",
-  storageBucket: "community-draw-161e8.appspot.com",
-  messagingSenderId: "565703571417",
-  appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
-};
+<h2>🎯 Admin Winner Selection</h2>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+<button onclick="pickWinner()">
+🎉 Pick Random Winner
+</button>
 
-let plan = "";
+<div id="winnerBox">
+No winner selected yet.
+</div>
 
-window.openForm = function(p){
-  plan = p;
-  document.getElementById("title").innerText = "Join " + p;
-  document.getElementById("formBox").style.display = "block";
-};
+</div>
 
-window.closeForm = function(){
-  document.getElementById("formBox").style.display = "none";
-};
+<div class="card">
 
-window.save = async function(){
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
+<h2>💳 Contribution Information</h2>
 
-  if(!name || !phone){
-    alert("Fill all fields");
-    return;
-  }
+<p>
+Monthly contribution: <b>R30</b>
+</p>
 
-  try {
-    await addDoc(collection(db, "members"), {
-      name: name,
-      phone: phone,
-      plan: plan,
-      status: "pending",
-      time: new Date()
-    });
+<button class="pay">
+Pay Contribution
+</button>
 
-    alert("Successfully joined!");
-    closeForm();
-  } catch (e) {
-    alert(e.message);
-  }
-};
+</div>
+
+<div class="card">
+
+<h2>📱 WhatsApp Community</h2>
+
+<p>
+Join our WhatsApp community for updates and winner announcements.
+</p>
+
+<button
+class="whatsapp"
+onclick="window.open('https://wa.me/')"
+>
+Join WhatsApp
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Community Charity Draw • All Rights Reserved
+</div>
+
+<script>
+
+let users = [];
+
+function addUser(){
+
+const userInput =
+document.getElementById("newUser");
+
+const userName =
+userInput.value.trim();
+
+if(userName === ""){
+alert("Please enter your name.");
+return;
+}
+
+users.push(userName);
+
+updateUsers();
+
+userInput.value = "";
+
+alert("Successfully joined the draw!");
+}
+
+function updateUsers(){
+
+const userList =
+document.getElementById("userList");
+
+userList.innerHTML = "";
+
+users.forEach((user,index)=>{
+
+const li =
+document.createElement("li");
+
+li.innerHTML =
+(index + 1) + ". " + user;
+
+userList.appendChild(li);
+
+});
+
+}
+
+function pickWinner(){
+
+if(users.length === 0){
+alert("No users registered.");
+return;
+}
+
+const randomIndex =
+Math.floor(Math.random() * users.length);
+
+const winner =
+users[randomIndex];
+
+document.getElementById("winnerBox").innerHTML =
+"🎉 WINNER 🎉<br><br>" +
+"<span style='color:green;'>" +
+winner +
+"</span>";
+
+}
+
 </script>
 
 </body>
