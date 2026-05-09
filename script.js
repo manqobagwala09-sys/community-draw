@@ -1,167 +1,152 @@
-// ==============================
-// 🌍 GLOBAL PLATFORM ENGINE
-// ==============================
+// ===============================
+// 🌍 CORE PLATFORM ENGINE
+// ===============================
 
-let state = JSON.parse(localStorage.getItem("platformState")) || {
+const Platform = {
+state: JSON.parse(localStorage.getItem("platform_state")) || {
 users: [],
 currentUser: null,
-invites: 0,
 points: 0,
-activityLog: []
-};
+invites: 0,
+winner: null,
+activity: []
+},
 
-function saveState(){
-localStorage.setItem("platformState", JSON.stringify(state));
+// SAVE DATA
+save(){
+localStorage.setItem("platform_state", JSON.stringify(this.state));
+},
+
+// LOG SYSTEM
+log(text){
+
+this.state.activity.push({
+text,
+time: new Date().toLocaleString()
+});
+
+if(this.state.activity.length > 30){
+this.state.activity.shift();
 }
 
-// ==============================
-// 🏠 USER SYSTEM (MAIN PAGE)
-// ==============================
+this.save();
+this.syncUI();
+},
 
-function join(){
+// ===============================
+// 👤 USER SYSTEM
+// ===============================
 
-let name = document.getElementById("name").value.trim();
+join(name){
 
-if(!name){
-alert("Enter name");
+if(!name) return;
+
+if(this.state.users.includes(name)){
+this.log("Duplicate user blocked: " + name);
 return;
 }
 
-if(state.users.includes(name)){
-alert("User already exists");
-return;
+this.state.users.push(name);
+this.state.currentUser = name;
+
+this.log("User joined: " + name);
+
+this.save();
+this.syncUI();
+},
+
+// ===============================
+// 🏆 DRAW SYSTEM
+// ===============================
+
+draw(){
+
+if(this.state.users.length === 0){
+this.log("Draw failed: no users");
+return null;
 }
 
-state.users.push(name);
-state.currentUser = name;
+const winner =
+this.state.users[Math.floor(Math.random() * this.state.users.length)];
 
-logActivity("User joined: " + name);
+this.state.winner = winner;
 
-saveState();
+this.log("Winner selected: " + winner);
 
-updateUI();
+this.save();
+this.syncUI();
 
-alert("Welcome " + name);
-}
+return winner;
+},
 
-function pickWinner(){
+// ===============================
+// 🔗 REFERRAL SYSTEM
+// ===============================
 
-if(state.users.length === 0){
-alert("No users available");
-return;
-}
+referral(){
 
-let winner = state.users[Math.floor(Math.random() * state.users.length)];
+this.state.invites++;
 
-logActivity("Winner selected: " + winner);
+let link = "https://yourapp.com/?ref=" + this.state.invites;
 
-document.getElementById("winner").innerText = "🏆 " + winner;
+this.log("Referral generated");
 
-saveState();
-}
+this.save();
+this.syncUI();
 
-// ==============================
-// 📊 GROWTH ENGINE
-// ==============================
+return link;
+},
 
-function generateReferral(){
+// ===============================
+// 🎮 GAME ENGINE
+// ===============================
 
-state.invites++;
-state.points += 2;
-
-let link = "https://yourapp.com/?ref=" + state.invites;
-
-document.getElementById("link").value = link;
-
-logActivity("Referral generated");
-
-saveState();
-
-updateUI();
-}
-
-// ==============================
-// 🎮 GAME / HUB ENGINE
-// ==============================
-
-function playGame(type){
+game(type){
 
 let reward = 0;
 
-switch(type){
-case "chess":
-reward = 3;
-break;
-case "predict":
-reward = 2;
-break;
-case "fish":
-reward = 1;
-break;
-default:
-reward = 1;
-}
+if(type === "chess") reward = 3;
+if(type === "predict") reward = 2;
+if(type === "fish") reward = 1;
 
-state.points += reward;
+this.state.points += reward;
 
-logActivity("Game played: " + type + " +" + reward);
+this.log(type + " played +" + reward + " points");
 
-saveState();
+this.save();
+this.syncUI();
 
-updateUI();
+return reward;
+},
 
-alert(type + " completed +" + reward + " points");
-}
+// ===============================
+// 📊 UI SYNC
+// ===============================
 
-// ==============================
-// 🧠 PLATFORM LOGIC CORE
-// ==============================
+syncUI(){
 
-function logActivity(text){
-
-state.activityLog.push({
-text,
-time: new Date().toISOString()
-});
-
-if(state.activityLog.length > 50){
-state.activityLog.shift();
-}
-}
-
-// ==============================
-// 🔄 UI ENGINE
-// ==============================
-
-function updateUI(){
-
-if(document.getElementById("count"))
-document.getElementById("count").innerText = state.users.length;
-
-if(document.getElementById("inv"))
-document.getElementById("inv").innerText = state.invites;
+if(document.getElementById("users"))
+document.getElementById("users").innerText = this.state.users.length;
 
 if(document.getElementById("points"))
-document.getElementById("points").innerText = state.points;
-}
+document.getElementById("points").innerText = this.state.points;
 
-// ==============================
-// 🌐 PAGE CONTROLLER
-// ==============================
+if(document.getElementById("invites"))
+document.getElementById("invites").innerText = this.state.invites;
 
-function goTo(page){
+if(document.getElementById("winner") && this.state.winner)
+document.getElementById("winner").innerText = "🏆 " + this.state.winner;
+},
 
-document.getElementById("main").style.display = "none";
-document.getElementById("growth").style.display = "none";
-document.getElementById("hub").style.display = "none";
-
-if(page === "main") document.getElementById("main").style.display = "block";
-if(page === "growth") document.getElementById("growth").style.display = "block";
-if(page === "hub") document.getElementById("hub").style.display = "block";
-}
-
-// ==============================
+// ===============================
 // 🚀 INIT SYSTEM
-// ==============================
+// ===============================
 
-updateUI();
+init(){
+this.syncUI();
+this.log("Platform Engine initialized");
+}
+};
+
+// AUTO START
+Platform.init();
