@@ -3,138 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw System</title>
+<title>Global Community Platform</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="header">
-<h1>🎉 Community Draw System</h1>
-<p>Draw • Growth • Community Hub</p>
+<h1>🌍 Global Community Platform</h1>
+<p>Membership • Games • Chess • Rewards</p>
 
-<!-- NAVIGATION -->
-<div style="margin-top:10px;">
-<button onclick="goToPage('main')" class="green">🏠 Main Draw</button>
-<button onclick="goToPage('growth')" class="pay">📊 Growth</button>
-<button onclick="goToPage('hub')" class="green">🎮 Hub</button>
+<div>
+<button onclick="goTo('main')" class="green">🏠 Main</button>
+<button onclick="goTo('growth')" class="pay">📊 Growth</button>
+<button onclick="goTo('hub')" class="green">🎮 Hub</button>
 </div>
 </header>
 
-<!-- ================= MAIN PAGE ================= -->
-<div id="mainPage">
-
-<div class="container">
+<!-- PAGE 1 -->
+<div id="main">
 
 <div class="card">
-<h2>💳 Payment</h2>
-<p>Pay R30 to enter draw</p>
-<button class="pay" onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
-Pay via Payfast
-</button>
+<h2>🎫 Entry System</h2>
+<input id="name" placeholder="Enter username">
+<button class="green" onclick="join()">Join</button>
 </div>
 
 <div class="card">
-<h2>🎫 Enter Draw</h2>
-<input id="name" placeholder="Enter your name">
-<button class="green" onclick="joinDraw()">Confirm Entry</button>
-<p id="ticketInfo"></p>
+<h2>🏆 Draw System</h2>
+<button class="green" onclick="pick()">Pick Winner</button>
+<div id="winner"></div>
 </div>
 
 <div class="card">
 <h2>📊 Dashboard</h2>
-<p>👥 Entries: <span id="totalUsers">0</span></p>
-<p>💰 Revenue: R<span id="estimatedRevenue">0</span></p>
+<p>Users: <span id="count">0</span></p>
 </div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div id="growth" style="display:none">
 
 <div class="card">
-<h2>👥 Live Users</h2>
-<ul id="userList"></ul>
-</div>
-
-<div class="card">
-<h2>🏆 Winner</h2>
-<button class="green" onclick="pickWinner()">Pick Winner</button>
-<div id="winnerBox">No winner yet</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= GROWTH PAGE ================= -->
-<div id="growthPage" style="display:none;">
-
-<div class="container">
-
-<div class="card">
-<h2>🚀 Growth Engine</h2>
-<p>Referral & Membership System</p>
-</div>
-
-<div class="card">
-<h2>💳 Membership</h2>
-<p>R30 Monthly Tier Active</p>
+<h2>💳 Membership System</h2>
+<p>30-Day Subscription Model</p>
 </div>
 
 <div class="card">
 <h2>🔗 Referral System</h2>
-<input id="refLink" readonly>
-<button class="green" onclick="generateLinkSafe()">Generate</button>
-<button class="pay" onclick="copyLinkSafe()">Copy</button>
+<button onclick="ref()">Generate Link</button>
+<input id="link" readonly>
 </div>
 
 <div class="card">
-<h2>📊 Progress</h2>
-<p>Invites: <span id="invites">0</span></p>
-
-<div style="background:#ddd;height:10px;border-radius:6px;">
-<div id="bar" style="width:0%;height:10px;background:#10b981;"></div>
+<h2>📈 Progress</h2>
+<p>Invites: <span id="inv">0</span></p>
 </div>
 
+</div>
+
+<!-- PAGE 3 -->
+<div id="hub" style="display:none">
+
+<div class="card">
+<h2>♟️ Chess Arena</h2>
+<p>Ranked matches + leaderboard system</p>
+<button onclick="game('chess')">Play Chess</button>
 </div>
 
 <div class="card">
-<h2>🏆 Leaderboard</h2>
-<ul id="board"></ul>
-<button class="green" onclick="simulateInviteSafe()">Simulate Invite</button>
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= COMMUNITY HUB PAGE ================= -->
-<div id="hubPage" style="display:none;">
-
-<div class="container">
-
-<div class="card">
-<h2>🎮 Community Hub</h2>
-<p>Engagement, predictions & rewards system</p>
+<h2>🎮 Game Hub</h2>
+<p>Prediction + Fishing + Simulation games</p>
+<button onclick="game('predict')">Play</button>
 </div>
 
 <div class="card">
-<h2>⚽ Soccer Predictions</h2>
-<button class="green" onclick="addPoint('prediction')">Predict Match</button>
-<p>Points: <span id="points">0</span></p>
-</div>
-
-<div class="card">
-<h2>👥 Team Challenges</h2>
-<button class="pay" onclick="addPoint('team')">Join Challenge</button>
-</div>
-
-<div class="card">
-<h2>🎁 Daily Reward</h2>
-<button class="green" onclick="addPoint('reward')">Claim Reward</button>
-</div>
-
-<div class="card">
-<h2>🏆 Hub Leaderboard</h2>
-<ul id="hubBoard"></ul>
-</div>
-
+<h2>🎬 Content Hub</h2>
+<p>Netflix-style engagement feed</p>
 </div>
 
 </div>
@@ -142,4 +88,4 @@ Pay via Payfast
 <script src="script.js"></script>
 
 </body>
-  </html>
+                                       </html>
