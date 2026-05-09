@@ -1,189 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Dashboard - Community Draw</title>
-
-<style>
-body{
-font-family:Arial;
-background:#111;
-color:white;
-margin:0;
-padding:20px;
-}
-
-h1{
-text-align:center;
-color:#00ff88;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th, td{
-border:1px solid #333;
-padding:10px;
-text-align:center;
-}
-
-th{
-background:#222;
-}
-
-tr{
-background:#1a1a1a;
-}
-
-button{
-padding:6px 10px;
-margin:2px;
-border:none;
-cursor:pointer;
-border-radius:5px;
-}
-
-.approve{
-background:green;
-color:white;
-}
-
-.reject{
-background:red;
-color:white;
-}
-
-.winnerBtn{
-background:gold;
-color:black;
-padding:12px;
-margin-top:10px;
-font-weight:bold;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Admin Dashboard</h1>
+<header class="header">
+<h1>🔐 Admin Panel</h1>
+</header>
 
-<!-- WINNER SECTION -->
-<div style="text-align:center;margin:20px;">
-<button class="winnerBtn" onclick="pickWinner()">
-Pick Winner
+<div class="container">
+
+<div class="card">
+<h2>System Control</h2>
+
+<button onclick="clearAll()" class="btn red">
+Reset System
 </button>
 
-<h2 id="winnerBox">No winner selected</h2>
+<button onclick="exportData()" class="btn blue">
+Export Data
+</button>
 </div>
 
-<!-- MEMBERS TABLE -->
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Phone</th>
-<th>Plan</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
+<div class="card">
+<h2>📊 Stats</h2>
+<p>Total Users: <span id="totalUsers"></span></p>
+<p>Total Revenue: R<span id="totalRevenue"></span></p>
+</div>
 
-<tbody id="dataBody">
-<tr>
-<td colspan="5">Loading...</td>
-</tr>
-</tbody>
-</table>
+</div>
 
-<!-- FIREBASE -->
-<script type="module">
+<script src="script.js"></script>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-doc,
-updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* FIREBASE CONFIG */
-const firebaseConfig = {
-apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNv8q",
-authDomain: "community-draw-161e8.firebaseapp.com",
-projectId: "community-draw-161e8",
-storageBucket: "community-draw-161e8.appspot.com",
-messagingSenderId: "565703571417",
-appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
-};
-
-/* INIT FIREBASE */
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* LOAD MEMBERS */
-async function loadMembers(){
-
-const table = document.getElementById("dataBody");
-
-const snapshot =
-await getDocs(collection(db, "members"));
-
-let html = "";
-
-snapshot.forEach((d) => {
-
-const data = d.data();
-
-html += `
-<tr>
-<td>${data.name || ""}</td>
-<td>${data.phone || ""}</td>
-<td>${data.plan || ""}</td>
-<td>${data.status || "pending"}</td>
-
-<td>
-<button class="approve"
-onclick="approve('${d.id}')">
-Approve
-</button>
-
-<button class="reject"
-onclick="reject('${d.id}')">
-Reject
-</button>
-</td>
-</tr>
-`;
-
-});
-
-if(html === ""){
-table.innerHTML =
-"<tr><td colspan='5'>No members yet</td></tr>";
-}else{
-table.innerHTML = html;
-}
-
-}
-
-/* APPROVE USER */
-window.approve = async function(id){
-
-const ref = doc(db, "members", id);
-
-await updateDoc(ref, {
-status: "approved"
-});
-
-loadMembers();
-
-};
-
-/* REJECT USER */
-window.reject = async function(id){
-
-const ref = doc
+</body>
+</html>
