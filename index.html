@@ -3,221 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Draw Pro Business</title>
-
-<style>
-body{font-family:Arial;margin:0;background:#f4f4f4}
-header{background:#0a7f39;color:white;text-align:center;padding:25px}
-.container{max-width:900px;margin:auto;padding:15px}
-
-.card{
-background:white;
-padding:20px;
-margin-top:15px;
-border-radius:14px;
-box-shadow:0 0 12px rgba(0,0,0,0.1);
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.pay{background:#007bff;color:white}
-.green{background:#0a7f39;color:white}
-.share{background:#25D366;color:white}
-
-li{
-list-style:none;
-padding:10px;
-margin:5px 0;
-background:#f7f7f7;
-border-radius:8px;
-}
-
-#winnerBox{
-font-size:22px;
-font-weight:bold;
-color:green;
-margin-top:10px;
-}
-
-small{color:gray}
-</style>
+<title>Community Draw System</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-<h1>🎉 Community Draw Pro</h1>
-<p>Pay • Enter • Win • Share • Grow</p>
+<header class="header">
+<h1>🎉 Community Draw System</h1>
+<p>Enter • Participate • Win</p>
 </header>
 
 <div class="container">
 
-<!-- PAYMENT -->
 <div class="card">
-<h2>💳 Payment Entry</h2>
-
-<p>R30 Entry Fee</p>
-
-<button class="pay"
-onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')">
-Pay Now
+<h2>💳 Step 1: Payment</h2>
+<button onclick="window.open('YOUR_PAYFAST_LINK_HERE','_blank')" class="btn pay">
+Pay R30 Entry
 </button>
-
-<small>After payment, continue below</small>
 </div>
 
-<!-- ENTRY -->
 <div class="card">
-<h2>🎫 Enter Draw</h2>
+<h2>🎫 Step 2: Join Draw</h2>
 
 <input id="name" placeholder="Enter your name">
 <input id="ref" placeholder="Referral code (optional)">
 
-<button class="green" onclick="joinDraw()">
+<button onclick="joinDraw()" class="btn green">
 Join Draw
 </button>
 
 <p id="ticketInfo"></p>
-
 </div>
 
-<!-- USERS -->
 <div class="card">
 <h2>👥 Entries</h2>
-<ul id="list"></ul>
+<ul id="userList"></ul>
 </div>
 
-<!-- DRAW -->
 <div class="card">
-<h2>🏆 Winner System</h2>
-
-<button class="green" onclick="pickWinner()">
+<h2>🏆 Winner</h2>
+<button onclick="pickWinner()" class="btn green">
 Pick Winner
 </button>
 
 <div id="winnerBox">No winner yet</div>
-
 </div>
 
-<!-- VIRAL SHARE -->
 <div class="card">
-<h2>📲 Grow & Earn</h2>
-
-<p>Share your referral link:</p>
-
-<p id="myLink"></p>
-
-<button class="share"
-onclick="share()">
+<h2>📲 Share System</h2>
+<button onclick="share()" class="btn whatsapp">
 Share on WhatsApp
 </button>
-
 </div>
 
 </div>
 
-<script>
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-let referrals = JSON.parse(localStorage.getItem("referrals")) || {};
-
-function joinDraw(){
-
-let name = document.getElementById("name").value.trim();
-let ref = document.getElementById("ref").value.trim();
-
-if(name === ""){
-alert("Enter name");
-return;
-}
-
-if(users.includes(name)){
-alert("Already entered");
-return;
-}
-
-users.push(name);
-localStorage.setItem("users", JSON.stringify(users));
-
-// referral tracking
-if(ref){
-referrals[ref] = (referrals[ref] || 0) + 1;
-localStorage.setItem("referrals", JSON.stringify(referrals));
-}
-
-document.getElementById("ticketInfo").innerText =
-"🎫 Entry confirmed for " + name;
-
-document.getElementById("name").value="";
-document.getElementById("ref").value="";
-
-render();
-
-}
-
-function render(){
-
-let list = document.getElementById("list");
-list.innerHTML="";
-
-users.forEach((u,i)=>{
-let li=document.createElement("li");
-li.innerText=(i+1)+". "+u;
-list.appendChild(li);
-});
-
-let link =
-window.location.href + "?ref=" + (users[0] || "user");
-
-document.getElementById("myLink").innerText = link;
-
-}
-
-function pickWinner(){
-
-if(users.length===0){
-alert("No entries");
-return;
-}
-
-let w = users[Math.floor(Math.random()*users.length)];
-
-document.getElementById("winnerBox").innerHTML =
-"🏆 WINNER: " + w;
-
-}
-
-function share(){
-
-let link =
-window.location.href;
-
-window.open(
-"https://wa.me/?text=Join%20Community%20Draw%20here:%20" + link,
-"_blank"
-);
-
-}
-
-render();
-
-</script>
+<script src="script.js"></script>
 
 </body>
-  </html>
+</html>
