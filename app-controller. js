@@ -1,0 +1,32 @@
+// APP CONTROLLER (MASTER ORCHESTRATOR)
+
+const AppController = {
+  init() {
+    console.log("System initializing...");
+
+    CoreEngine.load();
+
+    EventEngine.emit("app-ready");
+
+    this.bindUI();
+
+    console.log("System fully operational ✔");
+  },
+
+  bindUI() {
+    document.addEventListener("click", (e) => {
+      const action = e.target.getAttribute("data-action");
+
+      if (!action) return;
+
+      EventEngine.emit(action, { target: e.target });
+    });
+  },
+
+  restart() {
+    console.log("Restarting system...");
+    location.reload();
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => AppController.init());
