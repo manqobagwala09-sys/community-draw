@@ -1,0 +1,15 @@
+// CORE AUDIT SYSTEM (tracking actions)
+const AuditLogEngine = {
+  logs: [],
+
+  log(action) {
+    this.logs.push({
+      action,
+      time: new Date().toISOString()
+    });
+  },
+
+  getLogs() {
+    return this.logs;
+  }
+};
