@@ -1,0 +1,11 @@
+// BOOTSTRAP (SYSTEM STARTER)
+
+function startApp() {
+  CoreEngine.load();
+
+  EventEngine.emit("app-ready");
+
+  console.log("COMMUNITY DRAW SYSTEM ONLINE");
+}
+
+document.addEventListener("DOMContentLoaded", startApp);
