@@ -1,47 +1,32 @@
-<header style="background:#0f172a;color:white;padding:30px;text-align:center;">
-    <h1>Community Draw</h1>
-    <p>Join the community monthly draw and stand a chance to win.</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Community Draw</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Community Draw</h1>
+  <nav>
+    <a href="register.html">Register</a>
+    <a href="payment.html">Pay</a>
+    <a href="winners.html">Winners</a>
+    <a href="admin.html">Admin</a>
+  </nav>
 </header>
 
-<section style="padding:20px;">
-    <h2>Join the Draw</h2>
-
-    <form id="joinForm">
-        <input type="text" id="name" placeholder="Full Name" required><br><br>
-
-        <input type="tel" id="phone" placeholder="Phone Number" required><br><br>
-
-        <input type="email" id="email" placeholder="Email Address"><br><br>
-
-        <button type="submit">Join Now</button>
-    </form>
-
-    <p id="msg"></p>
+<section class="hero">
+  <h2>Win Daily & Monthly Prizes</h2>
+  <p>Join for only R30 per month</p>
+  <a class="btn" href="register.html">Join Now</a>
 </section>
 
-<section style="padding:20px;background:#f1f5f9;">
-    <h2>Latest Winners</h2>
-
-    <ul id="winnerList">
-        <li>No winners yet</li>
-    </ul>
+<section>
+  <h2>Latest Winners</h2>
+  <div id="winnerList"></div>
 </section>
 
-<footer style="background:#0f172a;color:white;padding:20px;text-align:center;">
-    © 2026 Community Draw
-</footer>
-
-<script>
-const form = document.getElementById("joinForm");
-
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-
-    document.getElementById("msg").innerHTML =
-        "Thank you " + name + ". Your entry was received.";
-
-    form.reset();
-});
-</script>
+<script src="app.js"></script>
+</body>
+</html>
