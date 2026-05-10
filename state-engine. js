@@ -1,0 +1,26 @@
+// CORE STATE ENGINE (single source of truth)
+const StateEngine = {
+  state: {
+    users: [],
+    entries: [],
+    winner: null,
+    isRunning: false
+  },
+
+  set(key, value) {
+    this.state[key] = value;
+  },
+
+  get(key) {
+    return this.state[key];
+  },
+
+  addEntry(entry) {
+    this.state.entries.push(entry);
+  },
+
+  reset() {
+    this.state.entries = [];
+    this.state.winner = null;
+  }
+};
