@@ -1,0 +1,12 @@
+// CORE RULES ENGINE (business logic)
+const RulesEngine = {
+  entryFee: 30,
+
+  isValidEntry(user) {
+    return user && user.paid === true;
+  },
+
+  canEnter(entry) {
+    return entry && entry.userId;
+  }
+};
