@@ -1,0 +1,11 @@
+// CORE SYNC ENGINE (UI updates)
+const SyncEngine = {
+  refreshUI() {
+    document.dispatchEvent(new Event("update-ui"));
+  },
+
+  notify(msg) {
+    console.log("NOTIFY:", msg);
+    alert(msg);
+  }
+};
