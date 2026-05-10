@@ -1,0 +1,23 @@
+// CONTROL ENGINE (SECURITY + SCHEDULING)
+
+const ControlEngine = {
+  admin: false,
+
+  login(password) {
+    this.admin = password === "admin123";
+    return this.admin;
+  },
+
+  requireAdmin() {
+    return this.admin;
+  },
+
+  startDrawTimer(callback) {
+    setInterval(() => {
+      const now = new Date();
+      if (now.getHours() === 18 && now.getMinutes() === 0) {
+        callback();
+      }
+    }, 60000);
+  }
+};
