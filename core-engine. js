@@ -1,0 +1,33 @@
+// CORE ENGINE (STATE + STORAGE + RULES + LOGS)
+
+const CoreEngine = {
+  state: {
+    users: [],
+    entries: [],
+    winner: null,
+    logs: []
+  },
+
+  addEntry(entry) {
+    this.state.entries.push(entry);
+    this.log("ENTRY_ADDED");
+  },
+
+  setWinner(user) {
+    this.state.winner = user;
+    this.log("WINNER_SELECTED");
+  },
+
+  save() {
+    localStorage.setItem("app", JSON.stringify(this.state));
+  },
+
+  load() {
+    const data = JSON.parse(localStorage.getItem("app"));
+    if (data) this.state = data;
+  },
+
+  log(action) {
+    this.state.logs.push({ action, time: Date.now() });
+  }
+};
