@@ -3,23 +3,8 @@
 <head>
   <title>Community Draw</title>
   <link rel="stylesheet" href="style.css">
-</head><script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+</head>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNqV8fyoBn6eA",
-    authDomain: "community-draw-161e8.firebaseapp.com",
-    databaseURL: "https://community-draw-161e8-default-rtdb.firebaseio.com",
-    projectId: "community-draw-161e8",
-    storageBucket: "community-draw-161e8.firebasestorage.app",
-    messagingSenderId: "565703571417",
-    appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
-  };
-
-  const app = initializeApp(firebaseConfig);
-
-  console.log("Firebase Connected");
-</script>
 <body>
 
 <header>
@@ -43,6 +28,26 @@
   <div id="winnerList"></div>
 </section>
 
+<!-- Firebase goes HERE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNqV8fyoBn6eA",
+    authDomain: "community-draw-161e8.firebaseapp.com",
+    databaseURL: "https://community-draw-161e8-default-rtdb.firebaseio.com",
+    projectId: "community-draw-161e8",
+    storageBucket: "community-draw-161e8.firebasestorage.app",
+    messagingSenderId: "565703571417",
+    appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  console.log("Firebase Connected");
+</script>
+
 <script src="app.js"></script>
+
 </body>
 </html>
