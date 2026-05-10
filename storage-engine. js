@@ -1,0 +1,14 @@
+// CORE STORAGE ENGINE (data persistence layer)
+const StorageEngine = {
+  save(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  },
+
+  load(key) {
+    return JSON.parse(localStorage.getItem(key)) || [];
+  },
+
+  clear(key) {
+    localStorage.removeItem(key);
+  }
+};
