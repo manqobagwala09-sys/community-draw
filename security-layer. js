@@ -1,0 +1,16 @@
+// CORE SECURITY (admin protection layer)
+const SecurityLayer = {
+  isAdmin: false,
+
+  login(password) {
+    if (password === "admin123") {
+      this.isAdmin = true;
+      return true;
+    }
+    return false;
+  },
+
+  requireAdmin() {
+    return this.isAdmin;
+  }
+};
