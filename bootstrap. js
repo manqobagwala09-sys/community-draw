@@ -1,0 +1,12 @@
+// CORE BOOTSTRAP (system startup)
+function bootstrap() {
+  console.log("Community Draw System Loading...");
+
+  StateEngine.set("isRunning", true);
+
+  EventBus.emit("system-ready");
+
+  console.log("System Ready ✔");
+}
+
+document.addEventListener("DOMContentLoaded", bootstrap);
