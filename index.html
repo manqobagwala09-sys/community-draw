@@ -1,34 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Community Draw</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Rewards Platform</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #0f172a;
+        color: white;
+    }
+
+    header {
+        background: #1e293b;
+        padding: 15px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #38bdf8;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    nav a {
+        color: white;
+        margin: 0 8px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        color: #38bdf8;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 40px 20px;
+        background: #1e293b;
+    }
+
+    .hero h2 {
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        background: #38bdf8;
+        color: black;
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #0ea5e9;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 10px;
+    }
+
+    .small {
+        font-size: 13px;
+        opacity: 0.8;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Community Draw</h1>
-  <nav>
-    <a href="register.html">Register</a>
-    <a href="payment.html">Pay</a>
-    <a href="winners.html">Winners</a>
-    <a href="admin.html">Admin</a>
-  </nav>
+    <h1>Community Rewards Platform</h1>
+    <nav>
+        <a href="register.html">Register</a>
+        <a href="payment.html">Pay</a>
+        <a href="winners.html">Winners</a>
+        <a href="admin.html">Admin</a>
+    </nav>
 </header>
 
+<!-- HERO SECTION -->
 <section class="hero">
-  <h2>Win Daily & Monthly Prizes</h2>
-  <p>Join for only R30 per month</p>
-  <a class="btn" href="register.html">Join Now</a>
+    <h2>Join & Get Access to Community Rewards</h2>
+    <p>Membership starts from R30 per cycle</p>
+    <a class="btn" href="register.html">Join Now</a>
 </section>
 
-<section>
-  <h2>Latest Winners</h2>
-  <div id="winnerList"></div>
-</section>
+<div class="container">
 
-<!-- Firebase goes HERE -->
+    <!-- ABOUT -->
+    <div class="card">
+        <h2>How It Works</h2>
+        <p>
+            Become a member of the Community Rewards Platform.
+            Members get access to promotional rewards, loyalty benefits,
+            and community-based giveaways funded by the platform.
+        </p>
+        <p class="small">
+            This is a membership rewards system, not a gambling platform.
+        </p>
+    </div>
+
+    <!-- MEMBERSHIP -->
+    <div class="card">
+        <h2>Membership Options</h2>
+        <ul>
+            <li>R30 - Basic Access Membership</li>
+            <li>R65 - 60 Days Access Membership</li>
+            <li>R100 - 90 Days Access Membership</li>
+        </ul>
+        <a class="btn" href="payment.html">Go to Payment</a>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="card">
+        <h2>Member Benefits</h2>
+        <ul>
+            <li>Access to weekly promotional rewards</li>
+            <li>Member dashboard (coming soon)</li>
+            <li>Bonus rewards for active members</li>
+            <li>Community participation system</li>
+        </ul>
+    </div>
+
+    <!-- WINNERS -->
+    <div class="card">
+        <h2>Latest Winners</h2>
+        <div id="winnerList">Loading winners...</div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Community Rewards Platform | All rights reserved
+</footer>
+
+<!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
@@ -43,11 +175,10 @@
   };
 
   const app = initializeApp(firebaseConfig);
-
   console.log("Firebase Connected");
 </script>
 
 <script src="app.js"></script>
 
 </body>
-</html>
+  </html>
