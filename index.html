@@ -46,10 +46,6 @@
         background: #1e293b;
     }
 
-    .hero h2 {
-        margin-bottom: 10px;
-    }
-
     .btn {
         background: #38bdf8;
         color: black;
@@ -89,6 +85,16 @@
         font-size: 12px;
         opacity: 0.7;
     }
+
+    .tag {
+        display: inline-block;
+        background: #0ea5e9;
+        color: black;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
 </style>
 </head>
 
@@ -99,15 +105,15 @@
     <nav>
         <a href="register.html">Register</a>
         <a href="payment.html">Membership</a>
-        <a href="winners.html">Highlights</a>
+        <a href="#income">Money Hub</a>
         <a href="admin.html">Admin</a>
     </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-    <h2>Join the Community Membership Network</h2>
-    <p>Access rewards, benefits, and community opportunities</p>
+    <h2>Community Membership & Rewards Network</h2>
+    <p>Access benefits, earn rewards, and explore opportunities</p>
     <p>Membership starts from R30 per cycle</p>
     <a class="btn" href="register.html">Become a Member</a>
 </section>
@@ -118,23 +124,19 @@
     <div class="card">
         <h2>How It Works</h2>
         <p>
-            This platform is a community membership system where users join to access benefits,
-            participate in activities, and receive rewards funded by the community system and sponsors.
-        </p>
-
-        <p>
-            Rewards are based on engagement, participation, referrals, and sponsor-funded allocations.
+            This is a community membership platform where users join to access benefits,
+            participate in activities, and unlock rewards funded by sponsors and platform activity.
         </p>
 
         <ul>
             <li>Active participation</li>
-            <li>Referral growth</li>
-            <li>Community engagement</li>
-            <li>Sponsored reward distribution</li>
+            <li>Referrals & community growth</li>
+            <li>Sponsored reward allocations</li>
+            <li>Engagement-based features</li>
         </ul>
 
         <p class="small">
-            This is a membership-based reward platform, not gambling or betting.
+            Membership-based platform — not gambling or betting.
         </p>
     </div>
 
@@ -142,16 +144,47 @@
     <div class="card">
         <h2>Membership Plans</h2>
         <ul>
-            <li>R30 - Starter Membership (Basic access)</li>
-            <li>R65 - Growth Membership (60-day access + rewards eligibility)</li>
-            <li>R100 - Premium Membership (90-day access + bonus benefits)</li>
+            <li>R30 - Starter Membership</li>
+            <li>R65 - Growth Membership</li>
+            <li>R100 - Premium Membership</li>
         </ul>
 
+        <a class="btn" href="payment.html">Activate Membership</a>
+    </div>
+
+    <!-- 💰 MONEY HUB (NEW SECTION) -->
+    <div class="card" id="income">
+        <span class="tag">Income System</span>
+        <h2>Ways This Platform Generates Income</h2>
+
+        <h3>1. Affiliate Recommendations</h3>
         <p class="small">
-            Membership fees support platform operations, rewards funding, and community growth.
+            Recommend useful products and earn commission when users purchase.
         </p>
 
-        <a class="btn" href="payment.html">Activate Membership</a>
+        <h3>2. Digital Products</h3>
+        <p class="small">
+            Sell CV templates, business guides, WhatsApp marketing packs, and tools.
+        </p>
+
+        <h3>3. Sponsored Listings</h3>
+        <p class="small">
+            Local businesses pay to be featured on the platform.
+        </p>
+
+        <h3>4. Membership Revenue</h3>
+        <p class="small">
+            Monthly membership fees support rewards and platform growth.
+        </p>
+    </div>
+
+    <!-- AFFILIATE SECTION -->
+    <div class="card">
+        <h2>Recommended Tools & Services</h2>
+        <p class="small">
+            Explore useful tools and services (affiliate-based income opportunities coming soon).
+        </p>
+        <a class="btn" href="#">View Recommendations</a>
     </div>
 
     <!-- BENEFITS -->
@@ -161,7 +194,7 @@
             <li>Access to community rewards system</li>
             <li>Referral earning opportunities</li>
             <li>Featured member selection</li>
-            <li>Exclusive community updates</li>
+            <li>Exclusive updates & opportunities</li>
         </ul>
     </div>
 
@@ -178,7 +211,7 @@
 </div>
 
 <footer>
-    © 2026 Community Membership Platform | All rights reserved
+    © 2026 Community Membership Platform | Income System Enabled
 </footer>
 
 <!-- FIREBASE -->
@@ -202,4 +235,4 @@
 <script src="app.js"></script>
 
 </body>
-    </html>
+</html>
