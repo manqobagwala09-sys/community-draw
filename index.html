@@ -34,21 +34,6 @@ line-height:1.6;
 overflow-x:hidden;
 }
 
-/* SCROLLBAR */
-
-::-webkit-scrollbar{
-width:8px;
-}
-
-::-webkit-scrollbar-track{
-background:#0f172a;
-}
-
-::-webkit-scrollbar-thumb{
-background:#38bdf8;
-border-radius:10px;
-}
-
 /* HEADER */
 
 header{
@@ -75,7 +60,6 @@ width:68px;
 height:68px;
 border-radius:50%;
 border:2px solid #38bdf8;
-box-shadow:0 0 15px rgba(56,189,248,.5);
 }
 
 header h1{
@@ -92,7 +76,7 @@ nav{
 margin-top:15px;
 display:flex;
 justify-content:center;
-gap:16px;
+gap:12px;
 flex-wrap:wrap;
 }
 
@@ -100,9 +84,9 @@ nav a{
 color:white;
 text-decoration:none;
 font-size:14px;
-transition:.3s;
 padding:6px 10px;
 border-radius:8px;
+transition:.3s;
 }
 
 nav a:hover{
@@ -120,24 +104,12 @@ linear-gradient(rgba(15,23,42,.80),rgba(15,23,42,.90)),
 url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop');
 background-size:cover;
 background-position:center;
-position:relative;
-}
-
-.hero::after{
-content:'';
-position:absolute;
-left:0;
-bottom:0;
-width:100%;
-height:80px;
-background:linear-gradient(transparent,#0f172a);
 }
 
 .hero h2{
 font-size:48px;
 color:#38bdf8;
 margin-bottom:20px;
-animation:fadeUp 1s ease;
 }
 
 .hero p{
@@ -145,7 +117,6 @@ max-width:850px;
 margin:auto;
 margin-bottom:18px;
 font-size:18px;
-animation:fadeUp 1.2s ease;
 }
 
 .highlight{
@@ -153,7 +124,7 @@ color:#38bdf8;
 font-weight:bold;
 }
 
-/* BUTTONS */
+/* BUTTON */
 
 .btn{
 background:#38bdf8;
@@ -165,12 +136,29 @@ font-weight:bold;
 display:inline-block;
 margin-top:15px;
 transition:.3s;
-box-shadow:0 0 14px rgba(56,189,248,.35);
 }
 
 .btn:hover{
-transform:translateY(-3px) scale(1.03);
+transform:scale(1.05);
 background:#0ea5e9;
+}
+
+/* TRUST */
+
+.trust-bar{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.trust-badge{
+background:#0f172a;
+padding:10px 14px;
+border-radius:30px;
+font-size:13px;
+border:1px solid rgba(255,255,255,.08);
 }
 
 /* STATS */
@@ -179,74 +167,54 @@ background:#0ea5e9;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:18px;
-margin-top:45px;
+margin-top:40px;
 }
 
 .stat-box{
 background:rgba(15,23,42,.88);
 padding:24px;
 border-radius:16px;
-backdrop-filter:blur(4px);
 border:1px solid rgba(255,255,255,.06);
-transition:.3s;
-}
-
-.stat-box:hover{
-transform:translateY(-4px);
 }
 
 .stat-box h2{
 color:#38bdf8;
 font-size:30px;
-margin-bottom:8px;
 }
 
 /* CONTAINER */
 
 .container{
-max-width:1120px;
+max-width:1100px;
 margin:auto;
 padding:25px;
 }
 
-/* CARDS */
+/* CARD */
 
 .card{
 background:#1e293b;
 padding:28px;
 margin:24px 0;
 border-radius:20px;
-box-shadow:0 0 18px rgba(0,0,0,.28);
-transition:.35s;
-border:1px solid rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.05);
+transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 24px rgba(56,189,248,.12);
+transform:translateY(-4px);
 }
 
 .card h2{
 color:#38bdf8;
 margin-bottom:15px;
-font-size:30px;
-}
-
-.card h3{
-color:#7dd3fc;
-margin-top:15px;
+font-size:28px;
 }
 
 .section-image{
 width:100%;
 border-radius:18px;
-margin:20px 0;
-box-shadow:0 0 18px rgba(0,0,0,.45);
-transition:.4s;
-}
-
-.section-image:hover{
-transform:scale(1.01);
+margin:18px 0;
 }
 
 .tag{
@@ -257,72 +225,36 @@ padding:6px 12px;
 border-radius:8px;
 font-size:12px;
 font-weight:bold;
-margin-bottom:14px;
-}
-
-.small{
-font-size:14px;
-opacity:.92;
-}
-
-ul{
-padding-left:22px;
-}
-
-ul li{
 margin-bottom:12px;
 }
 
-/* TESTIMONIALS */
+/* TESTIMONIAL */
 
 .testimonial{
 background:#0f172a;
-padding:20px;
-border-radius:16px;
-margin-bottom:16px;
+padding:18px;
+border-radius:14px;
+margin-bottom:12px;
 border-left:4px solid #38bdf8;
-}
-
-.testimonial strong{
-color:#38bdf8;
 }
 
 /* FAQ */
 
 .faq-item{
 background:#0f172a;
-padding:20px;
-border-radius:16px;
-margin-bottom:16px;
-}
-
-/* TRUST BAR */
-
-.trust-bar{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
-.trust-badge{
-background:#0f172a;
-padding:10px 16px;
-border-radius:30px;
-font-size:13px;
-border:1px solid rgba(255,255,255,.08);
+padding:18px;
+border-radius:14px;
+margin-bottom:12px;
 }
 
 /* FOOTER */
 
 footer{
 text-align:center;
-padding:45px 20px;
+padding:40px;
 background:#111827;
-margin-top:45px;
+margin-top:40px;
 font-size:14px;
-opacity:.92;
 }
 
 /* WHATSAPP */
@@ -333,63 +265,14 @@ bottom:20px;
 right:20px;
 background:#25D366;
 color:white;
-padding:15px 20px;
+padding:15px 18px;
 border-radius:50px;
 text-decoration:none;
 font-weight:bold;
-z-index:9999;
-box-shadow:0 0 14px rgba(0,0,0,.4);
-transition:.3s;
-}
-
-.whatsapp-btn:hover{
-transform:scale(1.05);
-}
-
-/* ANIMATION */
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-.hero{
-padding:90px 18px;
-}
-
-.hero h2{
-font-size:32px;
-}
-
-.hero p{
-font-size:16px;
-}
-
-header h1{
-font-size:24px;
-}
-
-.card h2{
-font-size:24px;
-}
-
-nav{
-gap:8px;
-}
-
 }
 
 </style>
+
 </head>
 
 <body>
@@ -397,14 +280,11 @@ gap:8px;
 <header>
 
 <div class="logo">
-
 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-
 <div>
 <h1>Community Membership Platform</h1>
-<p>Digital Opportunities • Community Growth • Entrepreneurship</p>
+<p>Digital Opportunities • Growth • Entrepreneurship</p>
 </div>
-
 </div>
 
 <nav>
@@ -423,44 +303,36 @@ gap:8px;
 <h2>Community Membership & Digital Opportunities</h2>
 
 <p>
-A modern digital platform focused on networking,
-business exposure, entrepreneurship,
-community growth and online opportunities.
+A modern platform for networking, business exposure,
+and online growth opportunities.
 </p>
 
-<p>
-Membership starts from
-<span class="highlight">R30</span>
-</p>
+<p>Membership starts from <span class="highlight">R30</span></p>
 
-<a class="btn" href="register.html">
-Become a Member
-</a>
+<a class="btn" href="register.html">Become a Member</a>
 
 <div class="trust-bar">
-
-<div class="trust-badge">Secure Platform</div>
-<div class="trust-badge">Community Focused</div>
+<div class="trust-badge">Secure</div>
 <div class="trust-badge">Mobile Friendly</div>
-<div class="trust-badge">Digital Growth</div>
-
+<div class="trust-badge">Community Driven</div>
+<div class="trust-badge">Growth Focused</div>
 </div>
 
 <div class="stats">
 
 <div class="stat-box">
 <h2>24/7</h2>
-<p>Digital Access</p>
+<p>Access</p>
 </div>
 
 <div class="stat-box">
 <h2>100%</h2>
-<p>Online Community</p>
+<p>Online System</p>
 </div>
 
 <div class="stat-box">
 <h2>2026</h2>
-<p>Growing Platform</p>
+<p>Growing</p>
 </div>
 
 </div>
@@ -469,201 +341,86 @@ Become a Member
 
 <div class="container">
 
-<div class="card">
-
-<span class="tag">How It Works</span>
-
-<h2>Community Growth Platform</h2>
-
-<img class="section-image"
-src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop">
-
-<p>
-A digital platform built for networking,
-business visibility, member engagement,
-entrepreneur support and online growth.
-</p>
-
-<ul>
-<li>Community participation</li>
-<li>Business exposure opportunities</li>
-<li>Digital resources access</li>
-<li>Networking support</li>
-<li>Entrepreneurship development</li>
-</ul>
-
-</div>
-
 <div class="card" id="benefits">
-
-<span class="tag">Member Benefits</span>
-
+<span class="tag">Benefits</span>
 <h2>Why Join?</h2>
 
-<img class="section-image"
-src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
-
 <ul>
-<li>Referral opportunities</li>
-<li>Digital updates & resources</li>
-<li>Featured business exposure</li>
-<li>Networking support</li>
-<li>Community engagement access</li>
-<li>Entrepreneur opportunities</li>
+<li>Business exposure</li>
+<li>Networking opportunities</li>
+<li>Digital growth tools</li>
+<li>Community support</li>
 </ul>
-
 </div>
 
 <div class="card">
-
-<span class="tag">Trust & Safety</span>
-
-<h2>Transparent Community Platform</h2>
-
-<img class="section-image"
-src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop">
+<span class="tag">How It Works</span>
+<h2>Simple System</h2>
 
 <p>
-We focus on transparency,
-secure participation,
-fair community access,
-and professional digital engagement.
+Join → Activate Membership → Access Platform → Grow Online
 </p>
-
 </div>
 
 <div class="card" id="partners">
+<span class="tag">Partners</span>
+<h2>Business Collaboration</h2>
 
-<span class="tag">Business Partnerships</span>
+<p>Partner with us for visibility and exposure.</p>
 
-<h2>Partner With Us</h2>
-
-<img class="section-image"
-src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop">
-
-<p>
-Work with a growing digital community
-through brand exposure,
-sponsorships and promotions.
-</p>
-
-<a class="btn"
-href="mailto:business@communityplatform.co.za">
-Apply For Partnership
+<a class="btn" href="mailto:business@communityplatform.co.za">
+Apply Now
 </a>
-
 </div>
 
 <div class="card">
-
-<span class="tag">Community Impact</span>
-
-<h2>Empowering Digital Growth</h2>
-
-<img class="section-image"
-src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop">
-
-<ul>
-<li>Youth empowerment</li>
-<li>Digital opportunities</li>
-<li>Business visibility</li>
-<li>Entrepreneur support</li>
-<li>Community development</li>
-</ul>
-
-</div>
-
-<div class="card">
-
 <span class="tag">Testimonials</span>
-
-<h2>Community Feedback</h2>
+<h2>Feedback</h2>
 
 <div class="testimonial">
-<p>
-"Professional, modern and easy to use."
-</p>
-<strong>- Community Member</strong>
+<p>"Clean and professional platform."</p>
+<strong>- Member</strong>
 </div>
 
 <div class="testimonial">
-<p>
-"Excellent platform for networking and digital exposure."
-</p>
-<strong>- Business Partner</strong>
+<p>"Great networking system."</p>
+<strong>- Partner</strong>
 </div>
 
 </div>
 
 <div class="card" id="faq">
-
 <span class="tag">FAQ</span>
-
-<h2>Frequently Asked Questions</h2>
+<h2>Questions</h2>
 
 <div class="faq-item">
 <h3>Is this gambling?</h3>
-<p>
-No. This platform is not betting,
-gambling or lottery based.
-</p>
+<p>No. It is a digital service platform.</p>
 </div>
 
 <div class="faq-item">
-<h3>How does membership work?</h3>
-<p>
-Members activate plans to access
-community features and digital services.
-</p>
-</div>
-
-<div class="faq-item">
-<h3>Is the platform mobile friendly?</h3>
-<p>
-Yes. The platform is optimized
-for smartphones and tablets.
-</p>
+<h3>How do I join?</h3>
+<p>Register and activate membership.</p>
 </div>
 
 </div>
 
 <div class="card" id="policies">
-
-<span class="tag">Policies</span>
-
-<h2>Legal Notice</h2>
-
+<span class="tag">Legal</span>
+<h2>Policy</h2>
 <p>
-This platform provides digital services,
-community access,
-networking opportunities
-and online engagement tools.
-
-Payments are not for gambling,
-betting or chance-based rewards.
+This platform provides digital services and community access only.
 </p>
-
 </div>
 
 </div>
 
 <footer>
-
 © 2026 Community Membership Platform
-
-<br><br>
-
-Built for community growth,
-entrepreneurship,
-digital opportunities
-and business exposure.
-
 </footer>
 
-<a class="whatsapp-btn"
-href="https://wa.me/27700000000"
-target="_blank">
-WhatsApp Support
+<a class="whatsapp-btn" href="https://wa.me/27700000000" target="_blank">
+WhatsApp
 </a>
 
 </body>
