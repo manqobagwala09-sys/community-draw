@@ -12,12 +12,20 @@ href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 
 <style>
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
     font-family:Arial,sans-serif;
-    margin:0;
     background:#0f172a;
     color:white;
+    line-height:1.6;
 }
+
+/* HEADER */
 
 header{
     background:#1e293b;
@@ -38,54 +46,64 @@ header{
 }
 
 .logo img{
-    width:55px;
-    height:55px;
+    width:60px;
+    height:60px;
     border-radius:50%;
     border:2px solid #38bdf8;
 }
 
 header h1{
-    margin:0;
-    font-size:26px;
     color:#38bdf8;
+    font-size:28px;
 }
 
 nav{
     margin-top:15px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
 }
 
 nav a{
     color:white;
-    margin:0 8px;
     text-decoration:none;
     font-size:14px;
+    transition:0.3s;
 }
 
 nav a:hover{
     color:#38bdf8;
 }
 
+/* HERO */
+
 .hero{
     text-align:center;
-    padding:60px 20px;
+    padding:70px 20px;
     background:linear-gradient(to right,#1e293b,#0f172a);
 }
 
 .hero h2{
     color:#38bdf8;
-    font-size:34px;
+    font-size:38px;
+    margin-bottom:15px;
 }
 
 .hero p{
-    font-size:16px;
-    line-height:1.6;
+    max-width:700px;
+    margin:auto;
+    margin-bottom:15px;
+    font-size:17px;
 }
+
+/* BUTTONS */
 
 .btn{
     background:#38bdf8;
     color:black;
-    padding:12px 20px;
-    border-radius:8px;
+    padding:12px 22px;
+    border-radius:10px;
     text-decoration:none;
     font-weight:bold;
     display:inline-block;
@@ -100,37 +118,43 @@ nav a:hover{
     transform:scale(1.05);
 }
 
+/* CONTAINER */
+
 .container{
-    padding:20px;
-    max-width:950px;
+    max-width:1050px;
     margin:auto;
+    padding:20px;
 }
+
+/* CARDS */
 
 .card{
     background:#1e293b;
-    padding:20px;
-    margin:18px 0;
-    border-radius:14px;
-    box-shadow:0 0 12px rgba(0,0,0,0.25);
+    padding:25px;
+    margin:20px 0;
+    border-radius:16px;
+    box-shadow:0 0 14px rgba(0,0,0,0.25);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
 }
 
 .card h2{
     color:#38bdf8;
+    margin-bottom:12px;
+}
+
+.card h3{
+    margin-top:14px;
+    color:#7dd3fc;
 }
 
 .small{
-    font-size:13px;
-    opacity:0.88;
-    line-height:1.7;
-}
-
-footer{
-    text-align:center;
-    padding:30px;
-    font-size:12px;
-    opacity:0.85;
-    background:#111827;
-    margin-top:30px;
+    font-size:14px;
+    opacity:0.9;
+    line-height:1.8;
 }
 
 .tag{
@@ -140,17 +164,21 @@ footer{
     padding:5px 10px;
     border-radius:6px;
     font-size:12px;
-    margin-bottom:10px;
+    margin-bottom:12px;
     font-weight:bold;
-}
-
-ul li{
-    margin-bottom:8px;
 }
 
 .highlight{
     color:#38bdf8;
     font-weight:bold;
+}
+
+ul{
+    padding-left:18px;
+}
+
+ul li{
+    margin-bottom:10px;
 }
 
 hr{
@@ -159,7 +187,72 @@ hr{
     margin:20px 0;
 }
 
-/* WhatsApp floating button */
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat-box{
+    background:#0f172a;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.05);
+}
+
+.stat-box h2{
+    color:#38bdf8;
+    font-size:28px;
+}
+
+.stat-box p{
+    font-size:13px;
+    opacity:0.8;
+}
+
+/* FAQ */
+
+.faq{
+    margin-top:15px;
+}
+
+.faq-item{
+    margin-bottom:15px;
+    padding:15px;
+    background:#0f172a;
+    border-radius:10px;
+}
+
+/* TESTIMONIALS */
+
+.testimonial{
+    background:#0f172a;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.testimonial strong{
+    color:#38bdf8;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:35px;
+    font-size:13px;
+    opacity:0.85;
+    background:#111827;
+    margin-top:40px;
+}
+
+/* WHATSAPP */
+
 .whatsapp-btn{
     position:fixed;
     bottom:20px;
@@ -172,6 +265,20 @@ hr{
     font-weight:bold;
     box-shadow:0 0 12px rgba(0,0,0,0.4);
     z-index:9999;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h2{
+    font-size:28px;
+}
+
+header h1{
+    font-size:22px;
+}
+
 }
 
 </style>
@@ -187,7 +294,7 @@ hr{
 
 <div>
 <h1>Community Membership Platform</h1>
-<p class="small">Digital Opportunities & Community Growth</p>
+<p class="small">Digital Opportunities • Community Growth • Online Services</p>
 </div>
 
 </div>
@@ -195,8 +302,10 @@ hr{
 <nav>
     <a href="register.html">Register</a>
     <a href="payment.html">Membership</a>
-    <a href="#income">Money Hub</a>
+    <a href="#income">Income Hub</a>
+    <a href="#benefits">Benefits</a>
     <a href="#partners">Partners</a>
+    <a href="#faq">FAQ</a>
     <a href="#policies">Policies</a>
     <a href="admin.html">Admin</a>
 </nav>
@@ -207,15 +316,41 @@ hr{
 
 <h2>Community Membership & Digital Opportunities</h2>
 
-<p>Access benefits, tools, referrals & sponsor programs</p>
+<p>
+A modern digital community platform focused on growth,
+networking, business visibility, referrals, and online opportunities.
+</p>
 
-<p>Membership starts from <span class="highlight">R30</span></p>
+<p>
+Membership starts from <span class="highlight">R30</span>
+</p>
 
 <a class="btn" href="register.html">Become a Member</a>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2>24/7</h2>
+<p>Digital Platform Access</p>
+</div>
+
+<div class="stat-box">
+<h2>100%</h2>
+<p>Online Community System</p>
+</div>
+
+<div class="stat-box">
+<h2>2026</h2>
+<p>Growing Digital Platform</p>
+</div>
+
+</div>
 
 </section>
 
 <div class="container">
+
+<!-- HOW IT WORKS -->
 
 <div class="card">
 
@@ -227,32 +362,38 @@ business exposure, and member engagement.
 </p>
 
 <ul>
-    <li>Community participation</li>
-    <li>Referral growth system</li>
-    <li>Digital tools & services</li>
-    <li>Sponsored opportunities</li>
+    <li>Community participation & engagement</li>
+    <li>Referral growth opportunities</li>
+    <li>Business & digital exposure</li>
+    <li>Sponsored promotions & campaigns</li>
+    <li>Online resources & member tools</li>
 </ul>
 
 <p class="small">
-This platform is for digital services and community engagement.
+This platform is designed for community engagement,
+digital services, online exposure, and membership access.
 It is NOT gambling, betting, lottery, or games of chance.
 </p>
 
 </div>
+
+<!-- MEMBERSHIP -->
 
 <div class="card">
 
 <h2>Membership Plans</h2>
 
 <ul>
-    <li>R30 Starter</li>
-    <li>R65 Growth</li>
-    <li>R100 Premium</li>
+    <li><strong>R30 Starter</strong> — Basic access</li>
+    <li><strong>R65 Growth</strong> — Extra opportunities</li>
+    <li><strong>R100 Premium</strong> — Full platform access</li>
 </ul>
 
 <a class="btn" href="payment.html">Activate Membership</a>
 
 </div>
+
+<!-- INCOME -->
 
 <div class="card" id="income">
 
@@ -261,31 +402,89 @@ It is NOT gambling, betting, lottery, or games of chance.
 <h2>Revenue Streams</h2>
 
 <h3>Affiliate Marketing</h3>
-<p class="small">Earn from product recommendations.</p>
+<p class="small">
+Earn through product recommendations and online promotions.
+</p>
 
 <h3>Digital Products</h3>
-<p class="small">Sell guides, templates & tools.</p>
+<p class="small">
+Sell guides, templates, resources, and online tools.
+</p>
 
 <h3>Sponsorships</h3>
-<p class="small">Businesses pay for exposure.</p>
+<p class="small">
+Businesses can promote services to our audience.
+</p>
 
 <h3>Memberships</h3>
-<p class="small">Supports platform growth.</p>
+<p class="small">
+Memberships help support community growth and development.
+</p>
 
 </div>
 
-<div class="card">
+<!-- BENEFITS -->
 
-<h2>Member Benefits</h2>
+<div class="card" id="benefits">
+
+<span class="tag">Member Benefits</span>
+
+<h2>Why Join?</h2>
 
 <ul>
-    <li>Community rewards system</li>
-    <li>Referral opportunities</li>
-    <li>Digital resources</li>
-    <li>Featured exposure</li>
+    <li>Community reward opportunities</li>
+    <li>Referral system access</li>
+    <li>Digital resources & updates</li>
+    <li>Featured business exposure</li>
+    <li>Networking opportunities</li>
+    <li>Online community support</li>
 </ul>
 
 </div>
+
+<!-- TRUST -->
+
+<div class="card">
+
+<span class="tag">Transparency</span>
+
+<h2>Community Trust & Safety</h2>
+
+<ul>
+    <li>Transparent membership structure</li>
+    <li>Secure digital platform environment</li>
+    <li>Community-focused participation</li>
+    <li>Fair access for all members</li>
+    <li>Strict anti-fraud monitoring</li>
+</ul>
+
+</div>
+
+<!-- TESTIMONIALS -->
+
+<div class="card">
+
+<span class="tag">Testimonials</span>
+
+<h2>Community Feedback</h2>
+
+<div class="testimonial">
+<p>
+"The platform is clean, simple, and easy to use."
+</p>
+<strong>- Community Member</strong>
+</div>
+
+<div class="testimonial">
+<p>
+"Great opportunity for digital exposure and networking."
+</p>
+<strong>- Business Partner</strong>
+</div>
+
+</div>
+
+<!-- PARTNERS -->
 
 <div class="card" id="partners">
 
@@ -294,20 +493,25 @@ It is NOT gambling, betting, lottery, or games of chance.
 <h2>Work With Us</h2>
 
 <p class="small">
-We connect businesses with a growing digital audience.
+We connect businesses with a growing digital audience
+through sponsorships and online promotions.
 </p>
 
 <ul>
     <li>Sponsored listings</li>
     <li>Brand promotion</li>
     <li>Advertising opportunities</li>
+    <li>Community exposure</li>
 </ul>
 
-<a class="btn" href="mailto:business@communityplatform.co.za">
+<a class="btn"
+href="mailto:business@communityplatform.co.za">
 Apply for Partnership
 </a>
 
 </div>
+
+<!-- MEDIA -->
 
 <div class="card">
 
@@ -316,17 +520,19 @@ Apply for Partnership
 <h2>For Companies & Sponsors</h2>
 
 <p class="small">
-We offer brand exposure, community reach,
-and digital engagement opportunities.
+We provide digital exposure and engagement opportunities
+for brands, startups, and entrepreneurs.
 </p>
 
 <ul>
-    <li>Target: Youth & entrepreneurs</li>
-    <li>Growing digital audience</li>
-    <li>Online engagement system</li>
+    <li>Youth & entrepreneur audience</li>
+    <li>Growing online community</li>
+    <li>Digital engagement system</li>
 </ul>
 
 </div>
+
+<!-- IMPACT -->
 
 <div class="card">
 
@@ -336,12 +542,53 @@ and digital engagement opportunities.
 
 <ul>
     <li>Youth empowerment</li>
-    <li>Digital skills exposure</li>
+    <li>Digital opportunities</li>
     <li>Business visibility</li>
-    <li>Online opportunities</li>
+    <li>Online community growth</li>
+    <li>Entrepreneur support</li>
 </ul>
 
 </div>
+
+<!-- FAQ -->
+
+<div class="card" id="faq">
+
+<span class="tag">FAQ</span>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<div class="faq-item">
+<h3>What is this platform?</h3>
+<p class="small">
+A digital community membership platform focused on
+online opportunities and engagement.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>How do memberships work?</h3>
+<p class="small">
+Members join through available membership plans
+to access community features and services.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Is this gambling?</h3>
+<p class="small">
+No. This platform is not gambling, betting,
+or lottery-based.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- POLICIES -->
 
 <div class="card" id="policies">
 
@@ -350,22 +597,32 @@ and digital engagement opportunities.
 <h2>Legal Notice</h2>
 
 <p class="small">
-This is a membership platform providing digital services and community access.
-Payments are NOT for gambling, betting, or chance-based winnings.
+This is a digital membership platform providing
+community services, engagement tools,
+and online opportunities.
+Payments are NOT for gambling, betting,
+or chance-based winnings.
 </p>
 
 <hr>
 
-<h2>Privacy</h2>
-<p class="small">We collect minimal data for platform use only.</p>
+<h2>Privacy Policy</h2>
+
+<p class="small">
+We collect limited information required for
+platform access, communication, and membership support.
+</p>
 
 <hr>
 
-<h2>Rules</h2>
+<h2>Platform Rules</h2>
+
 <ul class="small">
 <li>No fraud or abuse</li>
-<li>Respect members</li>
+<li>Respect community members</li>
 <li>No illegal activity</li>
+<li>No spam or harmful content</li>
+<li>Violation may lead to suspension</li>
 </ul>
 
 </div>
@@ -374,12 +631,13 @@ Payments are NOT for gambling, betting, or chance-based winnings.
 
 <footer>
 
-© 2026 Community Platform
+© 2026 Community Membership Platform
 
 <br><br>
 
-Digital community platform for engagement,
-business exposure, and digital opportunities.
+Digital community platform focused on engagement,
+business exposure, online opportunities,
+and community growth.
 
 </footer>
 
