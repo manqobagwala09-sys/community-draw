@@ -17,6 +17,9 @@
         background: #1e293b;
         padding: 15px;
         text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
 
     header h1 {
@@ -46,6 +49,10 @@
         background: #1e293b;
     }
 
+    .hero h2 {
+        color: #38bdf8;
+    }
+
     .btn {
         background: #38bdf8;
         color: black;
@@ -69,21 +76,25 @@
 
     .card {
         background: #1e293b;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 10px;
+        padding: 18px;
+        margin: 18px 0;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     .small {
         font-size: 13px;
-        opacity: 0.8;
+        opacity: 0.85;
+        line-height: 1.6;
     }
 
     footer {
         text-align: center;
-        padding: 20px;
+        padding: 25px;
         font-size: 12px;
-        opacity: 0.7;
+        opacity: 0.8;
+        background: #111827;
+        margin-top: 30px;
     }
 
     .tag {
@@ -94,6 +105,16 @@
         border-radius: 6px;
         font-size: 12px;
         margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    ul li {
+        margin-bottom: 8px;
+    }
+
+    .highlight {
+        color: #38bdf8;
+        font-weight: bold;
     }
 </style>
 </head>
@@ -102,10 +123,12 @@
 
 <header>
     <h1>Community Membership Platform</h1>
+
     <nav>
         <a href="register.html">Register</a>
         <a href="payment.html">Membership</a>
         <a href="#income">Money Hub</a>
+        <a href="#policies">Policies</a>
         <a href="admin.html">Admin</a>
     </nav>
 </header>
@@ -113,9 +136,18 @@
 <!-- HERO -->
 <section class="hero">
     <h2>Community Membership & Rewards Network</h2>
-    <p>Access benefits, earn rewards, and explore opportunities</p>
-    <p>Membership starts from R30 per cycle</p>
-    <a class="btn" href="register.html">Become a Member</a>
+
+    <p>
+        Access benefits, earn rewards, and explore opportunities
+    </p>
+
+    <p>
+        Membership starts from <span class="highlight">R30</span> per cycle
+    </p>
+
+    <a class="btn" href="register.html">
+        Become a Member
+    </a>
 </section>
 
 <div class="container">
@@ -123,9 +155,11 @@
     <!-- HOW IT WORKS -->
     <div class="card">
         <h2>How It Works</h2>
+
         <p>
-            This is a community membership platform where users join to access benefits,
-            participate in activities, and unlock rewards funded by sponsors and platform activity.
+            This is a community membership platform where users join
+            to access benefits, participate in activities, and unlock
+            rewards funded by sponsors and platform activity.
         </p>
 
         <ul>
@@ -136,103 +170,245 @@
         </ul>
 
         <p class="small">
-            Membership-based platform — not gambling or betting.
+            This is a membership-based platform designed for community
+            engagement, digital services, and member opportunities.
+            It is not a gambling, betting, lottery, or casino platform.
         </p>
     </div>
 
     <!-- MEMBERSHIP -->
     <div class="card">
         <h2>Membership Plans</h2>
+
         <ul>
             <li>R30 - Starter Membership</li>
             <li>R65 - Growth Membership</li>
             <li>R100 - Premium Membership</li>
         </ul>
 
-        <a class="btn" href="payment.html">Activate Membership</a>
+        <p class="small">
+            Membership fees contribute toward platform development,
+            community systems, digital services, and operational growth.
+        </p>
+
+        <a class="btn" href="payment.html">
+            Activate Membership
+        </a>
     </div>
 
-    <!-- 💰 MONEY HUB (NEW SECTION) -->
+    <!-- INCOME -->
     <div class="card" id="income">
-        <span class="tag">Income System</span>
+
+        <span class="tag">
+            Income System
+        </span>
+
         <h2>Ways This Platform Generates Income</h2>
 
         <h3>1. Affiliate Recommendations</h3>
+
         <p class="small">
-            Recommend useful products and earn commission when users purchase.
+            Recommend useful products and earn commission
+            when users purchase.
         </p>
 
         <h3>2. Digital Products</h3>
+
         <p class="small">
-            Sell CV templates, business guides, WhatsApp marketing packs, and tools.
+            Sell CV templates, business guides,
+            WhatsApp marketing packs, and tools.
         </p>
 
         <h3>3. Sponsored Listings</h3>
+
         <p class="small">
-            Local businesses pay to be featured on the platform.
+            Local businesses may pay to be featured
+            on the platform.
         </p>
 
         <h3>4. Membership Revenue</h3>
+
         <p class="small">
-            Monthly membership fees support rewards and platform growth.
+            Membership revenue supports platform operations,
+            digital services, community systems,
+            and sponsored reward activities.
         </p>
     </div>
 
-    <!-- AFFILIATE SECTION -->
+    <!-- AFFILIATE -->
     <div class="card">
         <h2>Recommended Tools & Services</h2>
+
         <p class="small">
-            Explore useful tools and services (affiliate-based income opportunities coming soon).
+            Explore useful tools and services.
+            Affiliate-based income opportunities coming soon.
         </p>
-        <a class="btn" href="#">View Recommendations</a>
+
+        <a class="btn" href="#">
+            View Recommendations
+        </a>
     </div>
 
     <!-- BENEFITS -->
     <div class="card">
         <h2>Member Benefits</h2>
+
         <ul>
-            <li>Access to community rewards system</li>
+            <li>Access to community reward systems</li>
             <li>Referral earning opportunities</li>
-            <li>Featured member selection</li>
+            <li>Featured member recognition</li>
             <li>Exclusive updates & opportunities</li>
+            <li>Digital resources & tools</li>
         </ul>
     </div>
 
-    <!-- COMMUNITY HIGHLIGHTS -->
+    <!-- COMMUNITY -->
     <div class="card">
         <h2>Community Highlights</h2>
-        <div id="winnerList">Loading featured members...</div>
+
+        <div id="winnerList">
+            No featured members yet. Be the first!
+        </div>
 
         <p class="small">
-            Featured members are selected based on activity, referrals, and participation.
+            Featured members may be selected based on
+            activity, referrals, engagement, participation,
+            or community contribution.
         </p>
+    </div>
+
+    <!-- POLICIES -->
+    <div class="card" id="policies">
+
+        <span class="tag">
+            Platform Policies
+        </span>
+
+        <h2>Terms & Conditions</h2>
+
+        <p class="small">
+            By joining this platform, members agree to follow
+            all community rules, platform policies,
+            and applicable laws.
+        </p>
+
+        <p class="small">
+            The platform reserves the right to suspend accounts
+            involved in fraud, abuse, spam, illegal activity,
+            or harmful behavior.
+        </p>
+
+        <hr>
+
+        <h2>Privacy Policy</h2>
+
+        <p class="small">
+            Basic user information may be collected for
+            membership management, communication,
+            platform improvements, and security purposes.
+        </p>
+
+        <p class="small">
+            User information is not intentionally sold
+            to third parties.
+        </p>
+
+        <hr>
+
+        <h2>Community Rules</h2>
+
+        <ul class="small">
+            <li>Respect all members</li>
+            <li>No spam or fake accounts</li>
+            <li>No illegal activity</li>
+            <li>No abusive behavior</li>
+            <li>No payment fraud attempts</li>
+        </ul>
+
+        <hr>
+
+        <h2>Refund Policy</h2>
+
+        <p class="small">
+            Membership payments support access to platform
+            systems, digital services, and operational costs.
+        </p>
+
+        <p class="small">
+            Refund requests may be reviewed individually
+            depending on the situation and applicable law.
+        </p>
+
+        <hr>
+
+        <h2>Important Platform Notice</h2>
+
+        <p class="small">
+            Membership fees are paid for platform access,
+            community services, digital features,
+            participation systems, and member benefits.
+        </p>
+
+        <p class="small">
+            Payments are not made for gambling,
+            betting, lottery participation,
+            or games of chance.
+        </p>
+
     </div>
 
 </div>
 
 <footer>
-    © 2026 Community Membership Platform | Income System Enabled
+    © 2026 Community Membership Platform
+
+    <br><br>
+
+    Community-driven membership platform focused on
+    digital services, engagement, referrals,
+    and sponsored opportunities.
+
+    <br><br>
+
+    Membership-based platform — not gambling,
+    betting, or lottery services.
 </footer>
 
 <!-- FIREBASE -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  const firebaseConfig = {
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+const firebaseConfig = {
+
     apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNqV8fyoBn6eA",
-    authDomain: "community-draw-161e8.firebaseapp.com",
-    databaseURL: "https://community-draw-161e8-default-rtdb.firebaseio.com",
-    projectId: "community-draw-161e8",
-    storageBucket: "community-draw-161e8.firebasestorage.app",
-    messagingSenderId: "565703571417",
-    appId: "1:565703571417:web:0edd18cce17644be6f8bc8"
-  };
 
-  const app = initializeApp(firebaseConfig);
-  console.log("Firebase Connected");
+    authDomain:
+    "community-draw-161e8.firebaseapp.com",
+
+    databaseURL:
+    "https://community-draw-161e8-default-rtdb.firebaseio.com",
+
+    projectId: "community-draw-161e8",
+
+    storageBucket:
+    "community-draw-161e8.firebasestorage.app",
+
+    messagingSenderId: "565703571417",
+
+    appId:
+    "1:565703571417:web:0edd18cce17644be6f8bc8"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+console.log("Firebase Connected");
+
 </script>
 
 <script src="app.js"></script>
 
 </body>
-</html>
+            </html>
