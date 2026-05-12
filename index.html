@@ -6,375 +6,575 @@
 <title>Community Membership Platform</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #0f172a;
-        color: white;
-    }
 
-    header {
-        background: #1e293b;
-        padding: 15px;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#0f172a;
+    color:white;
+}
 
-    header h1 {
-        margin: 0;
-        font-size: 24px;
-        color: #38bdf8;
-    }
+header{
+    background:#1e293b;
+    padding:15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
 
-    nav {
-        margin-top: 10px;
-    }
+header h1{
+    margin:0;
+    font-size:26px;
+    color:#38bdf8;
+}
 
-    nav a {
-        color: white;
-        margin: 0 8px;
-        text-decoration: none;
-        font-size: 14px;
-    }
+nav{
+    margin-top:10px;
+}
 
-    nav a:hover {
-        color: #38bdf8;
-    }
+nav a{
+    color:white;
+    margin:0 8px;
+    text-decoration:none;
+    font-size:14px;
+}
 
-    .hero {
-        text-align: center;
-        padding: 40px 20px;
-        background: #1e293b;
-    }
+nav a:hover{
+    color:#38bdf8;
+}
 
-    .hero h2 {
-        color: #38bdf8;
-    }
+.hero{
+    text-align:center;
+    padding:55px 20px;
+    background:linear-gradient(to right,#1e293b,#0f172a);
+}
 
-    .btn {
-        background: #38bdf8;
-        color: black;
-        padding: 12px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-        margin-top: 10px;
-    }
+.hero h2{
+    color:#38bdf8;
+    font-size:32px;
+}
 
-    .btn:hover {
-        background: #0ea5e9;
-    }
+.hero p{
+    font-size:16px;
+    line-height:1.6;
+}
 
-    .container {
-        padding: 20px;
-        max-width: 900px;
-        margin: auto;
-    }
+.btn{
+    background:#38bdf8;
+    color:black;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    display:inline-block;
+    margin-top:10px;
+    transition:0.3s;
+}
 
-    .card {
-        background: #1e293b;
-        padding: 18px;
-        margin: 18px 0;
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
+.btn:hover{
+    background:#0ea5e9;
+    transform:scale(1.05);
+}
 
-    .small {
-        font-size: 13px;
-        opacity: 0.85;
-        line-height: 1.6;
-    }
+.container{
+    padding:20px;
+    max-width:950px;
+    margin:auto;
+}
 
-    footer {
-        text-align: center;
-        padding: 25px;
-        font-size: 12px;
-        opacity: 0.8;
-        background: #111827;
-        margin-top: 30px;
-    }
+.card{
+    background:#1e293b;
+    padding:20px;
+    margin:18px 0;
+    border-radius:14px;
+    box-shadow:0 0 12px rgba(0,0,0,0.25);
+}
 
-    .tag {
-        display: inline-block;
-        background: #0ea5e9;
-        color: black;
-        padding: 4px 8px;
-        border-radius: 6px;
-        font-size: 12px;
-        margin-bottom: 10px;
-        font-weight: bold;
-    }
+.card h2{
+    color:#38bdf8;
+}
 
-    ul li {
-        margin-bottom: 8px;
-    }
+.small{
+    font-size:13px;
+    opacity:0.88;
+    line-height:1.7;
+}
 
-    .highlight {
-        color: #38bdf8;
-        font-weight: bold;
-    }
+footer{
+    text-align:center;
+    padding:30px;
+    font-size:12px;
+    opacity:0.85;
+    background:#111827;
+    margin-top:30px;
+}
+
+.tag{
+    display:inline-block;
+    background:#0ea5e9;
+    color:black;
+    padding:5px 10px;
+    border-radius:6px;
+    font-size:12px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+ul li{
+    margin-bottom:8px;
+}
+
+.highlight{
+    color:#38bdf8;
+    font-weight:bold;
+}
+
+hr{
+    border:none;
+    border-top:1px solid rgba(255,255,255,0.1);
+    margin:20px 0;
+}
+
+.stat-box{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.stat{
+    background:#0f172a;
+    padding:15px;
+    border-radius:10px;
+    flex:1;
+    min-width:120px;
+    text-align:center;
+}
+
+.stat h3{
+    margin:0;
+    color:#38bdf8;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Community Membership Platform</h1>
 
-    <nav>
-        <a href="register.html">Register</a>
-        <a href="payment.html">Membership</a>
-        <a href="#income">Money Hub</a>
-        <a href="#policies">Policies</a>
-        <a href="admin.html">Admin</a>
-    </nav>
+<h1>Community Membership Platform</h1>
+
+<nav>
+    <a href="register.html">Register</a>
+    <a href="payment.html">Membership</a>
+    <a href="#income">Money Hub</a>
+    <a href="#partners">Partners</a>
+    <a href="#policies">Policies</a>
+    <a href="admin.html">Admin</a>
+</nav>
+
 </header>
 
 <!-- HERO -->
+
 <section class="hero">
-    <h2>Community Membership & Rewards Network</h2>
 
-    <p>
-        Access benefits, earn rewards, and explore opportunities
-    </p>
+<h2>Community Membership & Digital Opportunities</h2>
 
-    <p>
-        Membership starts from <span class="highlight">R30</span> per cycle
-    </p>
+<p>
+Access community benefits, digital tools,
+referral opportunities, and sponsored programs.
+</p>
 
-    <a class="btn" href="register.html">
-        Become a Member
-    </a>
+<p>
+Membership starts from
+<span class="highlight">R30</span> per cycle
+</p>
+
+<a class="btn" href="register.html">
+Become a Member
+</a>
+
 </section>
 
 <div class="container">
 
-    <!-- HOW IT WORKS -->
-    <div class="card">
-        <h2>How It Works</h2>
+<!-- HOW IT WORKS -->
 
-        <p>
-            This is a community membership platform where users join
-            to access benefits, participate in activities, and unlock
-            rewards funded by sponsors and platform activity.
-        </p>
+<div class="card">
 
-        <ul>
-            <li>Active participation</li>
-            <li>Referrals & community growth</li>
-            <li>Sponsored reward allocations</li>
-            <li>Engagement-based features</li>
-        </ul>
+<h2>How It Works</h2>
 
-        <p class="small">
-            This is a membership-based platform designed for community
-            engagement, digital services, and member opportunities.
-            It is not a gambling, betting, lottery, or casino platform.
-        </p>
-    </div>
+<p>
+This platform is designed to help members
+connect with digital opportunities,
+community engagement systems,
+and sponsored activities.
+</p>
 
-    <!-- MEMBERSHIP -->
-    <div class="card">
-        <h2>Membership Plans</h2>
+<ul>
+    <li>Community participation</li>
+    <li>Referral & growth systems</li>
+    <li>Digital opportunities</li>
+    <li>Sponsored activities</li>
+    <li>Community recognition features</li>
+</ul>
 
-        <ul>
-            <li>R30 - Starter Membership</li>
-            <li>R65 - Growth Membership</li>
-            <li>R100 - Premium Membership</li>
-        </ul>
+<p class="small">
+This is a membership-based community platform
+focused on engagement, digital services,
+and business opportunities.
+It is not a gambling, betting,
+lottery, or casino platform.
+</p>
 
-        <p class="small">
-            Membership fees contribute toward platform development,
-            community systems, digital services, and operational growth.
-        </p>
+</div>
 
-        <a class="btn" href="payment.html">
-            Activate Membership
-        </a>
-    </div>
+<!-- MEMBERSHIP -->
 
-    <!-- INCOME -->
-    <div class="card" id="income">
+<div class="card">
 
-        <span class="tag">
-            Income System
-        </span>
+<h2>Membership Plans</h2>
 
-        <h2>Ways This Platform Generates Income</h2>
+<ul>
+    <li>R30 - Starter Membership</li>
+    <li>R65 - Growth Membership</li>
+    <li>R100 - Premium Membership</li>
+</ul>
 
-        <h3>1. Affiliate Recommendations</h3>
+<p class="small">
+Membership fees contribute toward
+platform growth, digital systems,
+community services, and operations.
+</p>
 
-        <p class="small">
-            Recommend useful products and earn commission
-            when users purchase.
-        </p>
+<a class="btn" href="payment.html">
+Activate Membership
+</a>
 
-        <h3>2. Digital Products</h3>
+</div>
 
-        <p class="small">
-            Sell CV templates, business guides,
-            WhatsApp marketing packs, and tools.
-        </p>
+<!-- INCOME -->
 
-        <h3>3. Sponsored Listings</h3>
+<div class="card" id="income">
 
-        <p class="small">
-            Local businesses may pay to be featured
-            on the platform.
-        </p>
+<span class="tag">
+Income System
+</span>
 
-        <h3>4. Membership Revenue</h3>
+<h2>Platform Revenue Streams</h2>
 
-        <p class="small">
-            Membership revenue supports platform operations,
-            digital services, community systems,
-            and sponsored reward activities.
-        </p>
-    </div>
+<h3>1. Affiliate Recommendations</h3>
 
-    <!-- AFFILIATE -->
-    <div class="card">
-        <h2>Recommended Tools & Services</h2>
+<p class="small">
+Recommended tools and services
+generate commission opportunities.
+</p>
 
-        <p class="small">
-            Explore useful tools and services.
-            Affiliate-based income opportunities coming soon.
-        </p>
+<h3>2. Digital Products</h3>
 
-        <a class="btn" href="#">
-            View Recommendations
-        </a>
-    </div>
+<p class="small">
+CV templates, guides,
+marketing resources,
+and digital tools.
+</p>
 
-    <!-- BENEFITS -->
-    <div class="card">
-        <h2>Member Benefits</h2>
+<h3>3. Sponsored Listings</h3>
 
-        <ul>
-            <li>Access to community reward systems</li>
-            <li>Referral earning opportunities</li>
-            <li>Featured member recognition</li>
-            <li>Exclusive updates & opportunities</li>
-            <li>Digital resources & tools</li>
-        </ul>
-    </div>
+<p class="small">
+Businesses may promote services
+through featured listings.
+</p>
 
-    <!-- COMMUNITY -->
-    <div class="card">
-        <h2>Community Highlights</h2>
+<h3>4. Membership Revenue</h3>
 
-        <div id="winnerList">
-            No featured members yet. Be the first!
-        </div>
+<p class="small">
+Membership supports community systems,
+platform operations,
+and digital development.
+</p>
 
-        <p class="small">
-            Featured members may be selected based on
-            activity, referrals, engagement, participation,
-            or community contribution.
-        </p>
-    </div>
+</div>
 
-    <!-- POLICIES -->
-    <div class="card" id="policies">
+<!-- BENEFITS -->
 
-        <span class="tag">
-            Platform Policies
-        </span>
+<div class="card">
 
-        <h2>Terms & Conditions</h2>
+<h2>Member Benefits</h2>
 
-        <p class="small">
-            By joining this platform, members agree to follow
-            all community rules, platform policies,
-            and applicable laws.
-        </p>
+<ul>
+    <li>Community reward systems</li>
+    <li>Referral opportunities</li>
+    <li>Digital resources</li>
+    <li>Featured member recognition</li>
+    <li>Exclusive opportunities</li>
+    <li>Community engagement activities</li>
+</ul>
 
-        <p class="small">
-            The platform reserves the right to suspend accounts
-            involved in fraud, abuse, spam, illegal activity,
-            or harmful behavior.
-        </p>
+</div>
 
-        <hr>
+<!-- COMMUNITY -->
 
-        <h2>Privacy Policy</h2>
+<div class="card">
 
-        <p class="small">
-            Basic user information may be collected for
-            membership management, communication,
-            platform improvements, and security purposes.
-        </p>
+<h2>Community Highlights</h2>
 
-        <p class="small">
-            User information is not intentionally sold
-            to third parties.
-        </p>
+<div id="winnerList">
+No featured members yet. Be the first!
+</div>
 
-        <hr>
+<p class="small">
+Featured members may be recognized
+based on participation,
+engagement,
+referrals,
+and community contribution.
+</p>
 
-        <h2>Community Rules</h2>
+</div>
 
-        <ul class="small">
-            <li>Respect all members</li>
-            <li>No spam or fake accounts</li>
-            <li>No illegal activity</li>
-            <li>No abusive behavior</li>
-            <li>No payment fraud attempts</li>
-        </ul>
+<!-- PARTNERS -->
 
-        <hr>
+<div class="card" id="partners">
 
-        <h2>Refund Policy</h2>
+<span class="tag">
+Business & Sponsorship
+</span>
 
-        <p class="small">
-            Membership payments support access to platform
-            systems, digital services, and operational costs.
-        </p>
+<h2>Partner With Our Community</h2>
 
-        <p class="small">
-            Refund requests may be reviewed individually
-            depending on the situation and applicable law.
-        </p>
+<p class="small">
+We help businesses,
+entrepreneurs,
+and brands connect with
+a growing digital community.
+</p>
 
-        <hr>
+<ul>
+    <li>Sponsored business listings</li>
+    <li>Featured promotions</li>
+    <li>Digital advertising opportunities</li>
+    <li>Community campaign partnerships</li>
+    <li>Brand exposure opportunities</li>
+</ul>
 
-        <h2>Important Platform Notice</h2>
+<p class="small">
+Our platform focuses on community growth,
+digital engagement,
+and business visibility.
+</p>
 
-        <p class="small">
-            Membership fees are paid for platform access,
-            community services, digital features,
-            participation systems, and member benefits.
-        </p>
+<a class="btn" href="mailto:business@communityplatform.co.za">
+Become a Partner
+</a>
 
-        <p class="small">
-            Payments are not made for gambling,
-            betting, lottery participation,
-            or games of chance.
-        </p>
+</div>
 
-    </div>
+<!-- IMPACT -->
+
+<div class="card">
+
+<span class="tag">
+Community Impact
+</span>
+
+<h2>Building Digital Opportunities</h2>
+
+<p class="small">
+Our mission is to support
+community growth,
+digital empowerment,
+small business visibility,
+and online opportunities.
+</p>
+
+<ul>
+    <li>Youth empowerment</li>
+    <li>Digital opportunities</li>
+    <li>Entrepreneur support</li>
+    <li>Community networking</li>
+    <li>Online business exposure</li>
+</ul>
+
+</div>
+
+<!-- STATS -->
+
+<div class="card">
+
+<span class="tag">
+Platform Activity
+</span>
+
+<h2>Community Statistics</h2>
+
+<div class="stat-box">
+
+<div class="stat">
+<h3>Growing</h3>
+<p class="small">Member Community</p>
+</div>
+
+<div class="stat">
+<h3>Active</h3>
+<p class="small">Participation Systems</p>
+</div>
+
+<div class="stat">
+<h3>Open</h3>
+<p class="small">Business Partnerships</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTACT -->
+
+<div class="card">
+
+<span class="tag">
+Contact & Support
+</span>
+
+<h2>Connect With Us</h2>
+
+<p class="small">
+For support,
+business inquiries,
+or sponsorship opportunities,
+contact our platform team.
+</p>
+
+<ul>
+    <li>Email: support@communityplatform.co.za</li>
+    <li>Business: business@communityplatform.co.za</li>
+    <li>WhatsApp support coming soon</li>
+</ul>
+
+</div>
+
+<!-- POLICIES -->
+
+<div class="card" id="policies">
+
+<span class="tag">
+Platform Policies
+</span>
+
+<h2>Terms & Conditions</h2>
+
+<p class="small">
+Members agree to follow
+community rules,
+platform policies,
+and applicable laws.
+</p>
+
+<p class="small">
+Accounts involved in abuse,
+spam,
+fraud,
+or illegal activity
+may be suspended.
+</p>
+
+<hr>
+
+<h2>Privacy Policy</h2>
+
+<p class="small">
+Basic user information may be collected
+for membership management,
+communication,
+platform improvements,
+and security purposes.
+</p>
+
+<p class="small">
+User information is not intentionally sold
+to third parties.
+</p>
+
+<hr>
+
+<h2>Community Rules</h2>
+
+<ul class="small">
+    <li>Respect all members</li>
+    <li>No spam or fake accounts</li>
+    <li>No abusive behavior</li>
+    <li>No illegal activity</li>
+    <li>No payment fraud attempts</li>
+</ul>
+
+<hr>
+
+<h2>Refund Policy</h2>
+
+<p class="small">
+Membership payments support
+platform systems,
+digital services,
+and operational costs.
+</p>
+
+<p class="small">
+Refund requests may be reviewed
+according to platform policies
+and applicable law.
+</p>
+
+<hr>
+
+<h2>Important Platform Notice</h2>
+
+<p class="small">
+Membership fees are paid for
+platform access,
+digital services,
+community systems,
+and participation features.
+</p>
+
+<p class="small">
+Payments are not made for gambling,
+betting,
+lottery participation,
+or games of chance.
+</p>
+
+</div>
 
 </div>
 
 <footer>
-    © 2026 Community Membership Platform
 
-    <br><br>
+© 2026 Community Membership Platform
 
-    Community-driven membership platform focused on
-    digital services, engagement, referrals,
-    and sponsored opportunities.
+<br><br>
 
-    <br><br>
+Community-driven digital platform focused on:
+engagement,
+referrals,
+business visibility,
+digital opportunities,
+and sponsored growth systems.
 
-    Membership-based platform — not gambling,
-    betting, or lottery services.
+<br><br>
+
+Membership-based platform —
+not gambling,
+betting,
+or lottery services.
+
 </footer>
 
 <!-- FIREBASE -->
+
 <script type="module">
 
 import { initializeApp }
@@ -382,23 +582,23 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNqV8fyoBn6eA",
+apiKey: "AIzaSyA6yW_a7_JXAd4zTLfRBTYNqV8fyoBn6eA",
 
-    authDomain:
-    "community-draw-161e8.firebaseapp.com",
+authDomain:
+"community-draw-161e8.firebaseapp.com",
 
-    databaseURL:
-    "https://community-draw-161e8-default-rtdb.firebaseio.com",
+databaseURL:
+"https://community-draw-161e8-default-rtdb.firebaseio.com",
 
-    projectId: "community-draw-161e8",
+projectId: "community-draw-161e8",
 
-    storageBucket:
-    "community-draw-161e8.firebasestorage.app",
+storageBucket:
+"community-draw-161e8.firebasestorage.app",
 
-    messagingSenderId: "565703571417",
+messagingSenderId: "565703571417",
 
-    appId:
-    "1:565703571417:web:0edd18cce17644be6f8bc8"
+appId:
+"1:565703571417:web:0edd18cce17644be6f8bc8"
 
 };
 
@@ -411,4 +611,4 @@ console.log("Firebase Connected");
 <script src="app.js"></script>
 
 </body>
-            </html>
+    </html>
